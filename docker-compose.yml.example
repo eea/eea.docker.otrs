@@ -18,12 +18,12 @@ otrs:
   - /etc/localtime:/etc/localtime:ro
 
   environment:
-    OTRS_DB_PASSWORD: "changeme"
-    OTRS_ROOT_PASSWORD: "changeme"
-    LDAP_HOST: "changeme"
-    LDAP_PASSWORD: "changeme"
+    OTRS_DB_PASSWORD: changeme
+    OTRS_ROOT_PASSWORD: changeme
+    LDAP_HOST: changeme
+    LDAP_PASSWORD: changeme
 
-    SERVER_NAME: "changeme" 
+    SERVER_NAME: changeme 
 
     SSL_KEY: |-
         -----BEGIN RSA PRIVATE KEY-----
@@ -60,7 +60,7 @@ mariadb:
   - /etc/localtime:/etc/localtime:ro
 
   environment:
-    MYSQL_ROOT_PASSWORD: "changme"
+    MYSQL_ROOT_PASSWORD: changme
 
 postfix:
   restart: always
@@ -69,5 +69,5 @@ postfix:
   - /etc/localtime:/etc/localtime:ro
 
   environment:
-    MTP_USER: "changeme"
-    MTP_PASS: "changeme"
+    MTP_USER: changeme
+    MTP_PASS: changeme
