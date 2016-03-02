@@ -1,0 +1,73 @@
+otrs:
+  build: otrs
+  restart: always
+  ports:
+  - "80:80"
+  - "443:443"
+
+  links:
+  - mariadb:mariadb
+  - postfix:postfix
+
+#  - memory_limit=35000
+
+  volumes:
+  - /backups:/backups
+#  - /mnt/otrsData/ArticleStorageFS:/opt/otrs/var/article
+  - /home/michimau/otrsData/ArticleStorageFS:/opt/otrs/var/article
+  - /etc/localtime:/etc/localtime:ro
+
+  environment:
+    OTRS_DB_PASSWORD: "changeme"
+    OTRS_ROOT_PASSWORD: "changeme"
+    LDAP_HOST: "changeme"
+    LDAP_PASSWORD: "changeme"
+
+    SERVER_NAME: "changeme" 
+
+    SSL_KEY: |-
+        -----BEGIN RSA PRIVATE KEY-----
+        changemechangemechangemechangemechangemechangemechangemechangeme
+        changemechangemechangemechangemechangemechangemechangemechangeme
+        changemechangemechangemechangemechangemechangemechangemechangeme
+        changemechangemechangemechangemechangemechangemechangemechangeme
+        -----END RSA PRIVATE KEY-----
+
+    SSL_CERT: |-
+        -----BEGIN CERTIFICATE-----
+        changemechangemechangemechangemechangemechangemechangemechangeme
+        changemechangemechangemechangemechangemechangemechangemechangeme
+        changemechangemechangemechangemechangemechangemechangemechangeme
+        changemechangemechangemechangemechangemechangemechangemechangeme
+        -----END CERTIFICATE-----
+
+    AUTH_CERT: |-
+        -----BEGIN CERTIFICATE-----
+        changemechangemechangemechangemechangemechangemechangemechangeme
+        changemechangemechangemechangemechangemechangemechangemechangeme
+        changemechangemechangemechangemechangemechangemechangemechangeme
+        changemechangemechangemechangemechangemechangemechangemechangeme
+        -----END CERTIFICATE-----
+
+mariadb:
+  restart: always
+  build: mariadb
+  expose:
+  - "3306"
+  volumes:
+#  - /mnt/otrsData/mysql:/var/lib/mysql
+  - /home/michimau/otrsData//mysql:/var/lib/mysql
+  - /etc/localtime:/etc/localtime:ro
+
+  environment:
+    MYSQL_ROOT_PASSWORD: "changme"
+
+postfix:
+  restart: always
+  image: eeacms/postfix:eionet
+  volumes:
+  - /etc/localtime:/etc/localtime:ro
+
+  environment:
+    MTP_USER: "changeme"
+    MTP_PASS: "changeme"
