@@ -390,6 +390,7 @@ $Self->{'Ticket::Frontend::AgentTicketNote'}->{'StateDefault'} =  'open';
 $Self->{'Ticket::Frontend::AgentTicketNote'}->{'State'} =  '1';
 delete $Self->{'Ticket::Frontend::AgentTicketClose'}->{'NoteMandatory'};
 $Self->{'Ticket::Frontend::TimeUnits'} =  '(work units)';
+$Self->{'Ticket::Frontend::OverviewSmall'}->{'ColumnHeader'} =  'TicketTitle';
 $Self->{'ArticleDir'} =  '/opt/otrs/var/article';
 $Self->{'Ticket::StorageModule'} =  'Kernel::System::Ticket::ArticleStorageFS';
 $Self->{'Ticket::IndexModule'} =  'Kernel::System::Ticket::IndexAccelerator::StaticDB';
@@ -639,6 +640,7 @@ $Self->{'TimeVacationDays::Calendar1'} =  {
 };
 $Self->{'TimeZone::Calendar1'} =  '+1';
 $Self->{'TimeZone::Calendar1Name'} =  'EEA Standard Calendar';
+$Self->{'SessionCheckRemoteIP'} =  '0';
 $Self->{'SendmailNotificationEnvelopeFrom'} =  'otrs@helpdesk.eionet.europa.eu';
 $Self->{'LogModule::LogFile'} =  '/var/log/otrs.log';
 $Self->{'LogModule'} =  'Kernel::System::Log::File';
