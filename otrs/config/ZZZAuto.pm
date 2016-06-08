@@ -249,6 +249,129 @@ $Self->{'Frontend::Module'}->{'AgentTicketEmail'} =  {
       'NavBar' => 'Ticket',
       'Prio' => '226',
       'Type' => ''
+    },
+    {
+      'AccessKey' => '',
+      'Block' => '',
+      'Description' => 'BDR FGas',
+      'Group' => [
+        'bdr_fgas_agents'
+      ],
+      'Link' => 'Action=AgentTicketEmail;Subaction=StoreNew;ExpandCustomerName=2;Dest=11%7C%7CBDR+requests%3A%3AF-GAS+for+ETC;Subject=Verification%20of%20the%20full%20report;Body=Dear+%5B+%5D%2C%3Cbr+%2F%3E%0D%0A%3Cbr+%2F%3E%0D%0AThank+yo
+u+for+your+inquiry.%3Cbr+%2F%3E%0D%0A%3Cbr+%2F%3E%0D%0ACompanies+that+place+on+the+market+10kt+CO2e+or+more+of+HFCs+during+the+preceding+calendar+year%2C%3Cbr+%2F%3E%0D%0Aare+required+to+have+the+accuracy+of+the+reported+data+verified+by+
+an+independent+auditor+by+30+June+%28Article+19+%286%29+of%26nbsp%3B%3Ca+href%3D%22http%3A%2F%2Feur-lex.europa.eu%2Flegal-content%2FEN%2FTXT%2F%3Furi%3Duriserv%3AOJ.L_.2014.150.01.0195.01.ENG%22%3ERegulation+%28EU%29+No+517%2F2014%3C%2Fa%
+3E%29.%3Cbr+%2F%3E%0D%0A%3Cbr+%2F%3E%0D%0AThe+amount+of+the+amount+of+HFCs+placed+on+the+market+is+automatically+calculated+in+sheet+IV%2C+Reporting+Section+9C.+Reporters+exceeding+the10kt+CO2e+threshold+are+required+to+acknowledge+this+v
+erification+requirement+by+ticking+a+box+on+sheet+IV.%3Cbr+%2F%3E%0D%0A%3Cbr+%2F%3E%0D%0AThe+company+must+keep+the+verification+report+for+at+least+five+years+and+the+verification+report+is+to+be+made+available%2C+on+request%2C+to+the+com
+petent+authority+of+the+Member+State+concerned+and+to+the+Commission.%3Cbr+%2F%3E%0D%0A%3Cbr+%2F%3E%0D%0AFurthermore+you+have+the+option+%E2%80%93+not+the+obligation+%E2%80%93+to+directly+upload+such+a+verification+document+if+it+is+avail
+able+at+the+time+of+reporting.%3Cbr+%2F%3E%0D%0A%3Cbr+%2F%3E%0D%0ASee+also+the+F-gas+reporting+FAQ%2C+question+-+3.8.+Do+I+need+to+submit+the+verification+of+the+report%2C+available+at%3A%26nbsp%3B%3Ca+href%3D%22http%3A%2F%2Fec.europa.eu%
+2Fclima%2Fpolicies%2Ff-gas%2Fdocumentation_en.htm%22%3Ehttp%3A%2F%2Fec.europa.eu%2Fclima%2Fpolicies%2Ff-gas%2Fdocumentation_en.htm%3C%2Fa%3E.%3Cbr+%2F%3E%0D%0A%3Cbr+%2F%3E%0D%0AFor+a+clarification+on+how+and+by+whom+the+verification+is+to
++be+performed%2C+please+consult+the+verification+guidance+document+at+%3Ca+href%3D%22http%3A%2F%2Fec.europa.eu%2Fclima%2Fpolicies%2Ff-gas%2Fdocs%2Fguidance_to_verifiers_en.pdf%22%3Ehttp%3A%2F%2Fec.europa.eu%2Fclima%2Fpolicies%2Ff-gas%2Fdo
+cs%2Fguidance_to_verifiers_en.pdf%3C%2Fa%3E+or+contact+the+European+Commission+at%26nbsp%3B%3Ca+href%3D%22mailto%3ACLIMA-HFC-REGISTRY%40ec.europa.eu%22%3ECLIMA-HFC-REGISTRY%40ec.europa.eu%3C%2Fa%3E%26nbsp%3Bor+your+competent+national+auth
+ority+as+listed+in%26nbsp%3B%3Ca+href%3D%22http%3A%2F%2Fec.europa.eu%2Fclima%2Fpolicies%2Ff-gas%2Fdocs%2Fcontact_list_en.pdf%22%3Ehttp%3A%2F%2Fec.europa.eu%2Fclima%2Fpolicies%2Ff-gas%2Fdocs%2Fcontact_list_en.pdf%3C%2Fa%3E.%3Cbr+%2F%3E%0D%
+0A%3Cbr+%2F%3E%0D%0A%3Cbr+%2F%3E%0D%0AKind+regards%2C',
+      'LinkOption' => '',
+      'Name' => 'New verification of the full report [FGas]',
+      'NavBar' => 'Ticket',
+      'Prio' => '227',
+      'Type' => ''
+    },
+    {
+      'AccessKey' => '',
+      'Block' => '',
+      'Description' => 'BDR FGas',
+      'Group' => [
+        'bdr_fgas_agents'
+      ],
+      'Link' => 'Action=AgentTicketEmail;Subaction=StoreNew;ExpandCustomerName=2;Dest=11%7C%7CBDR+requests%3A%3AF-GAS+for+ETC;Subject=QC+issue+9G+bulk+imports%2FPOM+without+any+quota;Body=Dear+Sir+or+Madam%2C%3Cbr+%2F%3E%0D%0A%26nbsp%3B%3
+Cbr+%2F%3E%0D%0AThank+you+for+your+report+submitted+at%3A%3Cbr+%2F%3E%0D%0A%26nbsp%3B%3Cbr+%2F%3E%0D%0A%5BInsert+URL%5D%3Cbr+%2F%3E%0D%0A%26nbsp%3B%3Cbr+%2F%3E%0D%0AIn+our+quality+checks+we+found+the+following+issue%28s%29+which+don%E2%80
+%99t+appear+plausible%3A%0D%0A%3Cul%3E%0D%0A%09%3Cli%3EYou+report+on+bulk+import+of+HFCs+in+section+2A+resulting+in+a+physical+placing+on+the+market+calculated+in+section+4M+and+consequently+a+demand+of+HFC+quota+calculated+in+section+9F.
+%3C%2Fli%3E%0D%0A%09%3Cli%3EHowever%2C+you+do+not+hold+any+quota+%28section+9G%29%3C%2Fli%3E%0D%0A%09%3Cli%3EWe+wonder+whether+your+2A+reporting+may+have+been+erroneous%3A+In+case+the+HFCs+you+imported+were+contained+in+products+or+equipm
+ent%2C+those+amounts+should+be+reported+in+section+11+instead+of+2A.+In+order+to+report+in+section+11%2C+you+need+to+tick+%E2%80%9CImporter+of+products%2Fequipment+containing+%26nbsp%3BF-gases%E2%80%9D+in+the+activity+selection.%3C%2Fli%3
+E%0D%0A%3C%2Ful%3E%0D%0A%26nbsp%3BPlease%2C+confirm+your+data+reported+so+far%2C+or+submit+a+revised+report+as+soon+as+possible.%3Cbr+%2F%3E%0D%0A%26nbsp%3B%3Cbr+%2F%3E%0D%0AThe+easiest+way+to+do+so+would+be+to%3A%0D%0A%3Cul%3E%0D%0A%09%3
+Cli%3Ecreate+a+new+envelope+in+the+BDR%3C%2Fli%3E%0D%0A%09%3Cli%3Ebrowse+in+that+new+envelope+and+activate+task%3C%2Fli%3E%0D%0A%09%3Cli%3Eclick+%E2%80%98copy+previous+delivery%E2%80%99%2C%26nbsp%3B+browse+to+and+select+your+previous+subm
+ission+to+be+copied%3C%2Fli%3E%0D%0A%09%3Cli%3Eopen+the+questionnaire+and+modify+the+activity+selection+and+numbers%3C%2Fli%3E%0D%0A%09%3Cli%3EActivate+the+%E2%80%9CFinish%E2%80%9D+tab+and+click%3A+%E2%80%9CClose+report+and+proceed+to+BDR
+%E2%80%9D%3C%2Fli%3E%0D%0A%09%3Cli%3EClick+%E2%80%98submit+to+DG+CLIMA%2FEEA%E2%80%99%3C%2Fli%3E%0D%0A%3C%2Ful%3E%0D%0A%28cf.+detailed+description+in+the+BDR+manual+available+at+%3Ca+href%3D%22https%3A%2F%2Fbdr.eionet.europa.eu%2Fhelp%2Ff
+gases%22%3Ehttps%3A%2F%2Fbdr.eionet.europa.eu%2Fhelp%2Ffgases%3C%2Fa%3E%29%3Cbr+%2F%3E%0D%0A%26nbsp%3B%3Cbr+%2F%3E%0D%0AIf+you+have+any+further+questions%2C+please+don%E2%80%99t+hesitate+to+contact+us.%3Cbr+%2F%3E%0D%0A%3Cbr+%2F%3E%0D%0AK
+ind+regards%2C',
+      'LinkOption' => '',
+      'Name' => 'QC issue 9G bulk imports/POM w/o any quota [FGas]',
+      'NavBar' => 'Ticket',
+      'Prio' => '228',
+      'Type' => ''
+    },
+    {
+      'AccessKey' => '',
+      'Block' => '',
+      'Description' => 'BDR FGas',
+      'Group' => [
+        'bdr_fgas_agents'
+      ],
+      'Link' => 'Action=AgentTicketEmail;Subaction=StoreNew;ExpandCustomerName=2;Dest=11%7C%7CBDR+requests%3A%3AF-GAS+for+ETC;Subject=New+QC+Issue%3A+4C+stocks+resulting+in+quota+demand;Body=Dear+Sir+or+Madam%2C%3Cbr+%2F%3E%0D%0A%26nbsp%3
+B%3Cbr+%2F%3E%0D%0AThank+you+for+your+report+submitted+at%3A%3Cbr+%2F%3E%0D%0A%3Cbr+%2F%3E%0D%0A%5Binsert+URL%5D%3Cbr+%2F%3E%0D%0A%3Cbr+%2F%3E%0D%0AIn+our+quality+checks+we+found+the+following+issue%28s%29+which+don%E2%80%99t+appear+plaus
+ible%3A%0D%0A%3Cul%3E%0D%0A%09%3Cli%3EIn+your+report+your+stocks+of+1.Jan+2015+in+section+4C+equal+the+4B+stocks.+The+same+goes+for+31st+December+2015+stocks+in+section+4H+and+4G.%3Cbr+%2F%3E%0D%0A%09This+would+mean+that+%3Cstrong%3Eall+%
+3C%2Fstrong%3Eyour+4B+1st+January+stocks+from+own+import+were+not+yet+placed+on+the+market%26nbsp%3B+%3D%26nbsp%3B%3Cstrong%3Enot%26nbsp%3B%3C%2Fstrong%3Eyet+cleared+by+customs+for+free+circulation+in+the+EU.%3Cbr+%2F%3E%0D%0A%09I+guess+t
+his+may+be+an+error.+In+case+all+your+2014+imports+were+released+by+customs+for+free+circulation+already+in+2014%2C+you+should+report+a+zero+in+4C+%28and+probably+also+a+zero+in+4H%29+In+4C+you+would+need+to+add+a+comment+to+explain+the+d
+eviation+from+your+report+on+2014+%28%27error+in+2014+report%27%29.%3C%2Fli%3E%0D%0A%09%3Cli%3E%3Cstrong%3EThis+would+change+the+initial+quota+assessment+for+2015+which+presently+concludes+in+a+need+of+HFC+quota+for+your+company.%3C%2Fstr
+ong%3E%3C%2Fli%3E%0D%0A%3C%2Ful%3E%0D%0A%26nbsp%3BPlease%2C+confirm+your+data+reported+so+far%2C+or+submit+a+revised+report+as+soon+as+possible.%3Cbr+%2F%3E%0D%0A%26nbsp%3B%3Cbr+%2F%3E%0D%0AThe+easiest+way+to+do+so+would+be+to%3A%0D%0A%3C
+ul%3E%0D%0A%09%3Cli%3ECreate+a+new+envelope+in+the+BDR%3C%2Fli%3E%0D%0A%09%3Cli%3EBrowse+in+that+new+envelope+and+activate+task%3C%2Fli%3E%0D%0A%09%3Cli%3EClick+%E2%80%98copy+previous+delivery%E2%80%99%2C%26nbsp%3B+browse+to+and+select+yo
+ur+previous+submission+to+be+copied%3C%2Fli%3E%0D%0A%09%3Cli%3EOpen+the+questionnaire+and+modify+the+activity+selection+and+numbers%3C%2Fli%3E%0D%0A%09%3Cli%3EActivate+the+%E2%80%9CFinish%E2%80%9D+tab+and+click%3A+%E2%80%9CClose+report+an
+d+proceed+to+BDR%E2%80%9D%3C%2Fli%3E%0D%0A%09%3Cli%3EClick+%E2%80%98submit+to+DG+CLIMA%2FEEA%E2%80%99%3C%2Fli%3E%0D%0A%3C%2Ful%3E%0D%0A%28cf.+detailed+description+in+the+BDR+manual+available+at+%3Ca+href%3D%22https%3A%2F%2Fbdr.eionet.euro
+pa.eu%2Fhelp%2Ffgases%22+target%3D%22_blank%22%3Ehttps%3A%2F%2Fbdr.eionet.europa.eu%2Fhelp%2Ffgases%3C%2Fa%3E%29%3Cbr+%2F%3E%0D%0A%26nbsp%3B%3Cbr+%2F%3E%0D%0AIf+you+have+any+further+questions%2C+please+don%E2%80%99t+hesitate+to+contact+us
+.',
+      'LinkOption' => '',
+      'Name' => 'New QC issue 4C stocks resulting in quota demand [FGas]',
+      'NavBar' => 'Ticket',
+      'Prio' => '229',
+      'Type' => ''
+    },
+    {
+      'AccessKey' => '',
+      'Block' => '',
+      'Description' => 'BDR FGas',
+      'Group' => [
+        'bdr_fgas_agents'
+      ],
+      'Link' => 'Action=AgentTicketEmail;Subaction=StoreNew;ExpandCustomerName=2;Dest=11%7C%7CBDR+requests%3A%3AF-GAS+for+ETC;Subject=New%20QC%20issue%3A%20section%2010%20data%20missing;Body=Dear%20Sir%20or%20Madam%2C%3Cbr%20%2F%3E%0A%26n
+bsp%3B%3Cbr%20%2F%3E%0AThank%20you%20for%20your%20report%20submitted%20at%3A%20%26nbsp%3B%3Cbr%20%2F%3E%0A%5BURL%5D%3Cbr%20%2F%3E%0AIn%20our%20quality%20checks%20we%20found%20the%20following%20issue(s)%20which%20don%E2%80%99t%20appear%20p
+lausible%3A%0A%3Cul%3E%0A%09%3Cli%3EIn%20section%2010%20(sheet%20V)%20you%20did%26nbsp%3B%3Cstrong%3ENOT%3C%2Fstrong%3E%26nbsp%3Breport%20on%20physical%20supplies%20of%20HFCs%20related%20to%20the%20authorisations%20you%20reported%20in%20s
+ection%209%20(sheet%20IV)%3C%2Fli%3E%0A%09%3Cli%3EWe%20wonder%20whether%20you%20may%20have%20forgotten%20to%20fill%20this%20section%20of%20the%20reporting%20questionnaire%3F%3C%2Fli%3E%0A%3C%2Ful%3E%0APlease%20note%20that%20as%20a%20%E2%8
+0%98new%20entrant%E2%80%99%2C%20you%20must%20have%20made%20a%20physical%20supply%20of%20HFCs%20related%20to%20the%20authorisation%20given.%20Otherwise%20the%20authorisation%20would%20not%20be%20valid.%3Cbr%20%2F%3E%0AThus%20you%20should%2
+0identify%20the%20traded%20gas%20and%20report%20the%20amounts%20supplied%3Cbr%20%2F%3E%0AThe%20physical%20supply%20of%20HFCs%20does%20not%20necessarily%20need%20to%20be%20made%20to%20the%20recipient%20of%20the%20authorisation.%20In%20case
+%20another%20company%20(e.g.%20non-EU%20equipment%20manufacturer)%20was%20the%20recipient%20of%20the%20physical%20supply%2C%20please%20identify%26nbsp%3B%3Cem%3Ethat%3C%2Fem%3E%26nbsp%3Bcompany%20in%20section%2010%20and%20report%20the%20s
+upply%20in%20their%20respective%20row.%20A%20recipient%20added%20in%20section%2010%20does%20not%20necessarily%20need%20to%20be%20registered%20in%20the%20HFC%20registry.%3Cbr%20%2F%3E%0ANote%20that%20you%20will%20need%20to%20upload%20some%
+20kind%20of%20proof%20(like%20invoice)%20for%20the%20supply%20in%20section%2010.%3Cbr%20%2F%3E%0A%26nbsp%3B%3Cbr%20%2F%3E%0APlease%2C%20confirm%20the%20data%20reported%20by%20replying%20to%20this%20email%20OR%3Cbr%20%2F%3E%0Asubmit%20a%20
+revised%20report%20as%20soon%20as%20possible.%3Cbr%20%2F%3E%0A%26nbsp%3B%3Cbr%20%2F%3E%0AThe%20easiest%20way%20to%20do%20so%20would%20be%20to%3A%0A%3Cul%3E%0A%09%3Cli%3Ecreate%20a%20new%20envelope%20in%20the%20BDR%3C%2Fli%3E%0A%09%3Cli%3E
+browse%20in%20that%20new%20envelope%20and%20activate%20task%3C%2Fli%3E%0A%09%3Cli%3Eclick%20%E2%80%98copy%20previous%20delivery%E2%80%99%2C%26nbsp%3B%20browse%20to%20and%20select%20your%20previous%20submission%20to%20be%20copied%3C%2Fli%3
+E%0A%09%3Cli%3Eopen%20the%20questionnaire%2C%20possibly%20add%20a%20recipient%20in%20section%2010%20and%20modify%20the%20numbers%3C%2Fli%3E%0A%09%3Cli%3EActivate%20the%20%E2%80%9CFinish%E2%80%9D%20tab%20and%20click%3A%20%E2%80%9CClose%20r
+eport%20and%20proceed%20to%20BDR%E2%80%9D%3C%2Fli%3E%0A%09%3Cli%3EClick%20%E2%80%98submit%20to%20DG%20CLIMA%2FEEA%E2%80%99%3C%2Fli%3E%0A%3C%2Ful%3E%0A(cf.%20detailed%20description%20on%20page%2038%20of%20the%26nbsp%3B%3Cstrong%3EF-GAS%20B
+DR%20User%20Manual%3C%2Fstrong%3E%26nbsp%3Bavailable%20at%26nbsp%3B%3Ca%20href%3D%22https%3A%2F%2Fbdr.eionet.europa.eu%2Fhelp%2Ffgases%22%20target%3D%22_blank%22%3Ehttps%3A%2F%2Fbdr.eionet.europa.eu%2Fhelp%2Ffgases%3C%2Fa%3E)%3Cbr%20%2F%3
+E%0A%26nbsp%3B%3Cbr%20%2F%3E%0AIf%20you%20have%20any%20further%20questions%2C%20please%20don%E2%80%99t%20hesitate%20to%20contact%20us.%3Cbr%20%2F%3E%0A%3Cbr%20%2F%3E%0AKind%20regards%2C%3Cbr%20%2F%3E%0A%26nbsp%3B',
+      'LinkOption' => '',
+      'Name' => 'New QC issue: section 10 data missing [FGas]',
+      'NavBar' => 'Ticket',
+      'Prio' => '230',
+      'Type' => ''
+    },
+    {
+      'AccessKey' => '',
+      'Block' => '',
+      'Description' => 'BDR ODS',
+      'Group' => [
+        'bdr_ods_agents'
+      ],
+      'Link' => 'Action=AgentTicketEmail;Subaction=StoreNew;ExpandCustomerName=2;CustomerTicketCounterCcCustomer=1;CcCustomerTicketText_1=ods%40eea.europa.eu;Dest=12%7C%7CBDR+requests%3A%3AODS+for+ETC;Subject=QA2;Body=Dear%20%2C%3Cbr%20%2
+F%3E%0A%3Cbr%20%2F%3E%0Athank%20you%20for%20submitting%20an%20ODS%20report%20for%202015.%20During%20our%20manual%20quality%20checks%20we%20noticed%20an%20inconsistency%20concerning%20trade%20with%20other%20EU%20undertakings.%3Cbr%20%2F%3E
+%0A%26nbsp%3B%3Cbr%20%2F%3E%0AAmounts%20reported%20by%20you%20in%20Table%206%20or%20Table%2010%26nbsp%3Bdo%20not%20align%20with%20what%20%5Bother%20company%20name%5D%20reported.%3Cbr%20%2F%3E%0A%26nbsp%3B%3Cbr%20%2F%3E%0APlease%20comment%
+20on%20this%20circumstance%20and%26nbsp%3Bget%20in%20touch%20with%20%5Bother%20company%20name%5D%20to%20align%20both%20of%20your%20reports.%3Cbr%20%2F%3E%0A%26nbsp%3B%3Cbr%20%2F%3E%0APlease%20follow%20these%20helpful%20hints%20for%20re-su
+bmission%20of%20your%20ODS%20report%3A%0A%3Cul%3E%0A%09%3Cli%3ERe-submission%20process%20step%201%3A%20Create%20a%20new%20envelope%20and%20make%20sure%20that%20you%20indicate%20in%20the%20title%20and%20the%20description%20of%20your%20enve
+lope%20that%20this%20is%20a%20new%20version.%3C%2Fli%3E%0A%09%3Cli%3ERe-submission%20process%20step%202%3A%20Browse%20into%20the%20newly%20created%20envelope%2C%20activate%20the%20Draft%20task%20and%20click%26nbsp%3Bon%20the%20%E2%80%9CCo
+py%20previous%20delivery%E2%80%9D%20button%20in%20the%20top%20right%20corner.%3C%2Fli%3E%0A%3C%2Ful%3E%0APlease%20do%20not%20hesitate%20to%20contact%20us%20should%20you%20have%20any%20further%20questions.%3Cbr%20%2F%3E%0A%26nbsp%3B%3Cbr%2
+0%2F%3E%0AKind%20regards%2C%3Cbr%20%2F%3E%0A%26nbsp%3B',
+      'LinkOption' => '',
+      'Name' => 'QA2 [ODS]',
+      'NavBar' => 'Ticket',
+      'Prio' => '231',
+      'Type' => ''
     }
   ],
   'NavBarName' => 'Ticket',
