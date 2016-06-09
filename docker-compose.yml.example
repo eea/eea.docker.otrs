@@ -22,7 +22,7 @@ otrs:
     OTRS_ROOT_PASSWORD: changeme
     LDAP_HOST: changeme
     LDAP_PASSWORD: changeme
-    #to match what you have defined in the Dockerfile of Postfix
+    #MTP_RELAY to match what you have defined in the Dockerfile of Postfix
     MTP_RELAY: ironport1.eea.europa.eu
 
     SERVER_NAME: changeme 
