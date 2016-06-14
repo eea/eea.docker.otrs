@@ -65,6 +65,7 @@ echo "$SSL_CERT" > /etc/pki/tls/certs/star-eionet2012.crt
 echo "$SSL_KEY" > /etc/pki/tls/private/star-eionet2012.key
 echo "$AUTH_CERT" > /etc/pki/tls/certs/rapidssl_ca.crt
 
+touch /var/log/otrs.log
 chown otrs /var/log/otrs.log
 chgrp apache /var/log/otrs.log
 
