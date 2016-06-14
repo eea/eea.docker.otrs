@@ -17,7 +17,7 @@ RUN yum install -y epel-release && \
     "perl(Encode::HanExtra)" "perl(GD)" "perl(GD::Text)" "perl(GD::Graph)" \ 
     "perl(JSON::XS)" "perl(Mail::IMAPClient)" "perl(PDF::API2)" \ 
     "perl(Text::CSV_XS)" "perl(YAML::XS)" "perl(Text::CSV_XS)" "perl(DBD::mysql)" \
-    supervisor tar which wget git sendmail
+    supervisor tar which wget git sendmail sendmail-cf
 
 RUN yum install -y http://ftp.otrs.org/pub/otrs/RPMS/rhel/6/otrs-${OTRS_VERSION}${SUB_OTRS_VERSION}.noarch.rpm
 
