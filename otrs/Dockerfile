@@ -34,6 +34,8 @@ COPY config/OutOfOffice.xml ${OTRS_ROOT}Kernel/Config/Files/OutOfOffice.xml
 COPY config/FollowUp.pm ${OTRS_ROOT}Kernel/System/PostMaster/FollowUp.pm
 COPY config/Core.Agent.js ${OTRS_ROOT}var/httpd/htdocs/js/Core.Agent.js
 
+COPY config/local-host-names /etc/mail/local-host-names
+
 #httpd configuration file SSL
 COPY config/zzz_otrs.conf /etc/httpd/conf.d/zzz_otrs.conf
 COPY config/ssl.conf /etc/httpd/conf.d/ssl.conf
