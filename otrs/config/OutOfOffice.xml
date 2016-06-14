@@ -7,7 +7,7 @@
         <Setting>
             <Hash>
                 <Item Key="Module">Kernel::System::PostMaster::Filter::OutOfOffice</Item>
-                <Item Key="OutOfOfficeString">Automatická odpoveď|Automatická odpověď|Automatic reply|Automatikus válasz|Automatisch antwoord|Automatische Antwort|Automatisk svar|Automatski odogovor|Automatyczne|Autoreply|Autoresponder|Autosvar|Out of Office|Réponse automatique|Resposta Automática|is out of the office|ist außer Haus|est absent|Ikke til stede|Fraværende</Item>
+                <Item Key="OutOfOfficeString">Out of Office</Item>
             </Hash>
         </Setting>
     </ConfigItem>
