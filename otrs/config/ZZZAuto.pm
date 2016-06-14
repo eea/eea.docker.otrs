@@ -392,7 +392,7 @@ delete $Self->{'Ticket::Frontend::AgentTicketClose'}->{'NoteMandatory'};
 $Self->{'Ticket::Frontend::TimeUnits'} =  '(work units)';
 $Self->{'Ticket::Frontend::OverviewSmall'}->{'ColumnHeader'} =  'TicketTitle';
 $Self->{'ArticleDir'} =  '/opt/otrs/var/article';
-$Self->{'Ticket::StorageModule'} =  'Kernel::System::Ticket::ArticleStorageFS';
+$Self->{'Ticket::StorageModule'} =  'Kernel::System::Ticket::ArticleStorageDB';
 $Self->{'Ticket::IndexModule'} =  'Kernel::System::Ticket::IndexAccelerator::StaticDB';
 $Self->{'PostMaster::PreFilterModule'}->{'111-OoO'} =  {
   'Module' => 'Kernel::System::PostMaster::Filter::OutOfOffice',
