@@ -48,6 +48,7 @@ ${OTRS_ROOT}bin/Cron.sh start otrs
 ${OTRS_ROOT}bin/otrs.Scheduler.pl -w 1
 ${OTRS_ROOT}bin/otrs.RebuildConfig.pl
 ${OTRS_ROOT}bin/otrs.DeleteCache.pl
+${OTRS_ROOT}bin/otrs.RebuildTicketIndex.pl
 
 git clone -b otrs4 https://github.com/eea/eionet.otrs.theme.git
 chmod 755 /eionet.otrs.theme/install.sh
@@ -63,9 +64,6 @@ ${OTRS_ROOT}bin/otrs.SetPermissions.pl --otrs-user=otrs --web-group=apache /opt/
 echo "$SSL_CERT" > /etc/pki/tls/certs/star-eionet2012.crt
 echo "$SSL_KEY" > /etc/pki/tls/private/star-eionet2012.key
 echo "$AUTH_CERT" > /etc/pki/tls/certs/rapidssl_ca.crt
-
-chown otrs /var/log/otrs.log
-chgrp apache /var/log/otrs.log
 
 #Launch supervisord
 echo -e "Starting supervisord..."
