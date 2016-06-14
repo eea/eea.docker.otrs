@@ -69,5 +69,5 @@ RUN chmod 755 /*.sh
 
 RUN usermod -G apache otrs
 
-EXPOSE 80 443
+EXPOSE 80 443 25
 CMD ["/run.sh"]
