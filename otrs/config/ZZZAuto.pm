@@ -394,10 +394,6 @@ $Self->{'Ticket::Frontend::OverviewSmall'}->{'ColumnHeader'} =  'TicketTitle';
 $Self->{'ArticleDir'} =  '/opt/otrs/var/article';
 $Self->{'Ticket::StorageModule'} =  'Kernel::System::Ticket::ArticleStorageDB';
 $Self->{'Ticket::IndexModule'} =  'Kernel::System::Ticket::IndexAccelerator::StaticDB';
-$Self->{'PostMaster::PreFilterModule'}->{'111-OoO'} =  {
-  'Module' => 'Kernel::System::PostMaster::Filter::OutOfOffice',
-  'OutOfOfficeString' => 'AutomatickÃ¡ odpoveÄ|AutomatickÃ¡ odpovÄ|Automatic reply|Automatikus vÃ¡lasz|Automatisch antwoord|Automatische Antwort|Automatisk svar|Automatski odogovor|Automatyczne|Autoreply|Autoresponder|Ausvar|Out of Office|RÃ©ponse automatique|Resposta AutomÃ¡tica|is out of the office|ist auÃer Haus|est absent|Ikke til stede|FravÃ¦rende'
-};
 $Self->{'Frontend::Module'}->{'AdminGenericInterfaceMappingSimple'} =  {
   'Description' => 'Admin',
   'Group' => [
