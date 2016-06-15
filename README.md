@@ -15,7 +15,7 @@ moving data volume containers from one host to another:
 - donor host
 
 ```
-# docker run --rm --volumes-from=otrs_data -v $(pwd):/backup busybox tar cvfp /backup/otrs_data.tar /var/lib/mysql
+# docker run --rm --volumes-from=otrs_data -v $(pwd):/backups busybox tar cvfp /backups/otrs_data.tar /var/lib/mysql
 ```
 
 - target host
