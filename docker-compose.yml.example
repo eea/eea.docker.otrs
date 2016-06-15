@@ -4,7 +4,8 @@ otrs:
   ports:
   - "80:80"
   - "443:443"
-
+  - "25:25"
+  
   hostname: helpdesk
   domainname: eionet.europa.eu
 
@@ -26,7 +27,7 @@ otrs:
     LDAP_HOST: changeme
     LDAP_PASSWORD: changeme
     #MTP_RELAY to match what you have defined in the Dockerfile of Postfix
-    MTP_RELAY: ironport1.eea.europa.eu
+    MTP_RELAY: ironports.eea.europa.eu
 
     SERVER_NAME: changeme 
 
