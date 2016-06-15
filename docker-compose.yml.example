@@ -5,6 +5,9 @@ otrs:
   - "80:80"
   - "443:443"
 
+  hostname: helpdesk
+  domainname: eionet.europa.eu
+
   links:
   - mariadb:mariadb
   - postfix:postfix
@@ -56,9 +59,12 @@ mariadb:
   build: mariadb
   expose:
   - "3306"
+  volumes_from:
+    - otrs_data
   volumes:
 #  - /mnt/otrsData/mysql:/var/lib/mysql
-  - /home/michimau/otrsData//mysql:/var/lib/mysql
+  #to stransfer files, remove :ro for backup purposes
+  - /backups:/backups:ro
   - /etc/localtime:/etc/localtime:ro
 
   environment:
