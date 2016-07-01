@@ -143,7 +143,7 @@ sub Run {
 #michimau - http://blog.otrs.org/2010/10/22/dont-let-out-of-office-emails-change-your-ticket/
 #    if ( $ticket{StateType} !~ /^new/ || $GetParam{'X-OTRS-FollowUp-State'} ) {
      if ( ($Ticket{StateType} !~ /^new/ || $GetParam{'X-OTRS-FollowUp-State'})
-         && !( $Self->{ConfigObject}->Get('OoO-Header') ? $GetParam{ $Self->{ConfigObject}->Get('OoO-Header') } : 0 )
+#        && !( $Self->{ConfigObject}->Get('OoO-Header') ? $GetParam{ $Self->{ConfigObject}->Get('OoO-Header') } : 0 )
          ) {
         $TicketObject->TicketStateSet(
             State => $GetParam{'X-OTRS-FollowUp-State'} || $State,
