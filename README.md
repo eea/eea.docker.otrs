@@ -27,10 +27,17 @@ moving data volume containers from one host to another:
 
 ## Release to production
 
-The production deployment isn't made with `git clone` and `docker-compose build`. Instead it pulls an image from Docker Hub.
+The production deployment is not made with `git clone` and `docker-compose build`. Instead it pulls a tagged image from Docker Hub.
 When you have tested your changes and are satisfied, then you must push a new image up. Here is how you do it:
 
-    docker build -t eeacms/eea-otrs:latest otrs
-    docker push eeacms/eea-otrs:latest
+    edit VERSION.txt
+    git commit VERSION.txt
+    version=$(cat VERSION.txt)
+    git tag -a $version -m "Tagging the $version release of the 'otrs' Docker image."
+    git push origin release-1.2.X
+    docker build -t eeacms/eea-otrs:$version otrs
+    docker push eeacms/eea-otrs:$version
 
-This mechanism will allow us to later implement release versioning and rollback of deployments.
+The purpose of the procedure is to be able to redeploy the exact same image on a new host, and to be
+able to roll back one or more versions if the deployment has problems.
+
