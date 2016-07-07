@@ -37,7 +37,9 @@ follows [semantic versioning](http://semver.org/) principles.  Here is how you d
     version=$(cat VERSION.txt)
     git tag -a $version -m "Tagging the $version release of the 'otrs' Docker image."
     git push origin $version
-    docker build -t eeacms/eea-otrs:$version otrs
+    docker build -t eeacms/eea-otrs:latest otrs
+    docker tag eeacms/eea-otrs:latest eeacms/eea-otrs:$version
+    docker push eeacms/eea-otrs:latest
     docker push eeacms/eea-otrs:$version
 
 The purpose of the procedure is to be able to redeploy the exact same image on a
