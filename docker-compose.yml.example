@@ -28,6 +28,7 @@ otrs:
     LDAP_PASSWORD: changeme
     #MTP_RELAY to match what you have defined in the Dockerfile of Postfix
     MTP_RELAY: ironports.eea.europa.eu
+    MAIL_ADDRESSES: @helpdesk.eionet.europa.eu helpdesk@eionet.europa.eu
 
     SERVER_NAME: changeme 
 

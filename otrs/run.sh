@@ -22,6 +22,7 @@ sed "s#mtp_relay#$MTP_RELAY#g" -i ${OTRS_ROOT}Kernel/Config/Files/ZZZAuto.pm
 
 sed "s#host_ip_address#$SERVER_NAME#g" -i /etc/httpd/conf.d/zzz_otrs.conf
 
+# Redundant creation of database: Use MYSQL_USER, MYSQL_PASSWORD and MYSQL_DATABASE
 $mysqlcmd -e 'use otrs'
 if [ $? -ne 0  ]; then
 
@@ -69,6 +70,20 @@ touch /var/log/otrs.log
 chown otrs /var/log/otrs.log
 chgrp apache /var/log/otrs.log
 
-#Launch supervisord
+#
+# Configure email
+#
+if [ -z "$MAIL_ADDRESSES" ]; then
+   MAIL_ADDRESSES="@$(hostname)"
+fi
+> /etc/mail/virtusertable
+for address in $MAIL_ADDRESSES
+do
+    echo "$address  otrs" >> /etc/mail/virtusertable
+done
+( cd /etc/mail ; make )
+sed -e 's#  *#\n#g'  <<< "$MAIL_ADDRESSES" | sed -e 's#.*@##' |sort|uniq > /etc/mail/local-host-names
+
+# Launch supervisord
 echo -e "Starting supervisord..."
 supervisord
