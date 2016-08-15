@@ -37,6 +37,10 @@ follows [semantic versioning](http://semver.org/) principles.  Here is how you d
     version=$(cat VERSION.txt)
     git tag -a $version -m "Tagging the $version release of the 'otrs' Docker image."
     git push origin $version
+
+    git push origin master
+    
+    in case there's no automatic build on docker hub:
     docker build -t eeacms/eea-otrs:latest otrs
     docker tag eeacms/eea-otrs:latest eeacms/eea-otrs:$version
     docker push eeacms/eea-otrs:latest
