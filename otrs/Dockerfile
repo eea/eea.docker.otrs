@@ -1,5 +1,6 @@
 #OTRS ticketing system docker image.
-FROM centos:6.6
+#FROM centos:6.6
+FROM centos:6.8
 
 MAINTAINER michimau <mauro.michielon@eea.europa.eu>
 
@@ -33,6 +34,11 @@ COPY config/GenericAgent.pm ${OTRS_ROOT}Kernel/Config/GenericAgent.pm
 COPY config/OutOfOffice.xml ${OTRS_ROOT}Kernel/Config/Files/OutOfOffice.xml
 COPY config/FollowUp.pm ${OTRS_ROOT}Kernel/System/PostMaster/FollowUp.pm
 COPY config/Core.Agent.js ${OTRS_ROOT}var/httpd/htdocs/js/Core.Agent.js
+
+RUN cd /etc/mail && \
+    rm virtusertable.db && \
+    make && \
+    cd - 
 
 #COPY config/local-host-names /etc/mail/local-host-names
 COPY config/sendmail.mc /etc/mail/sendmail.mc
