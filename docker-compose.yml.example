@@ -6,8 +6,8 @@ otrs:
   - "443:443"
   - "25:25"
   
-  hostname: helpdesk
-  domainname: eionet.europa.eu
+  hostname: changeme
+  domainname: changeme.com
 
   links:
   - mariadb:mariadb
@@ -27,8 +27,8 @@ otrs:
     LDAP_HOST: changeme
     LDAP_PASSWORD: changeme
     #MTP_RELAY to match what you have defined in the Dockerfile of Postfix
-    MTP_RELAY: ironports.eea.europa.eu
-    MAIL_ADDRESSES: @helpdesk.eionet.europa.eu helpdesk@eionet.europa.eu
+    MTP_RELAY: changeme.com
+    MAIL_ADDRESSES: @changeme.changeme.com changeme@changeme.com
 
     SERVER_NAME: changeme 
 
@@ -58,19 +58,49 @@ otrs:
 
 mariadb:
   restart: always
-  build: mariadb
-  expose:
-  - "3306"
+  image: mariadb:5.5
+#  expose:
+#  - "3306"
+
+# InnoDB is enabled by default with a 10MB datafile in /var/lib/mysql/.
+# Read the manual for more InnoDB related options. There are many!
+# you can't just change log file size, requires special procedure
+  command:
+  - mysqld
+  - --default_storage_engine=InnoDB
+  - --character-set-server=utf8
+  - --collation-server=utf8_general_ci
+  - --init-connect=SET NAMES utf8
+  - --innodb_log_file_size=256M
+  - --innodb_buffer_pool_size=3GB
+  - --max_allowed_packet=20M
+  - --bulk_insert_buffer_size=20M
+  - --query_cache_size=32M
+  - --skip-character-set-client-handshake
+  - --skip-host-cache
+  - --wait_timeout=600
+# - --init-connect=SET NAMES utf8; SET collation_connection = utf8_unicode_ci
+
   volumes_from:
-    - otrs_data
+  - otrsdata
   volumes:
-#  - /mnt/otrsData/mysql:/var/lib/mysql
-  #to stransfer files, remove :ro for backup purposes
-  - /backups:/backups:ro
   - /etc/localtime:/etc/localtime:ro
+# - /backups:/backups:ro
+
+  labels:
+    io.rancher.scheduler.affinity:host_label: hostname=changeme
+    io.rancher.sidekicks: otrsdata
 
   environment:
-    MYSQL_ROOT_PASSWORD: changme
+    MYSQL_ROOT_PASSWORD: changeme
+
+otrsdata:
+  image: tianon/true:latest
+  volumes:
+  - helpdesk-eionet-mysql:/var/lib/mysql
+  labels:
+    io.rancher.container.start_once: "true"
+    io.rancher.scheduler.affinity:host_label: hostname=changeme
 
 postfix:
   restart: always
@@ -81,3 +111,5 @@ postfix:
   environment:
     MTP_USER: changeme
     MTP_PASS: changeme
+  labels:
+    io.rancher.scheduler.affinity:host_label: hostname=changeme
