@@ -99,6 +99,20 @@ $Self->{'Frontend::Module'}->{'AgentTicketEmail'} =  {
     {
       'AccessKey' => '',
       'Block' => '',
+      'Description' => 'BDR ODS',
+      'Group' => [
+        'bdr_ods_agents'
+      ],
+      'Link' => 'Action=AgentTicketEmail;Subaction=StoreNew;ExpandCustomerName=2;CustomerTicketCounterCcCustomer=1;CcCustomerTicketText_1=ods%40eea.europa.eu;Dest=12%7C%7CBDR+requests%3A%3AODS+for+ETC',
+      'LinkOption' => '',
+      'Name' => 'New empty email [ODS]',
+      'NavBar' => 'Ticket',
+      'Prio' => '232',
+      'Type' => ''
+    },
+    {
+      'AccessKey' => '',
+      'Block' => '',
       'Description' => 'BDR FGas',
       'Group' => [
         'bdr_fgas_agents'
