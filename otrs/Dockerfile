@@ -8,6 +8,11 @@ ENV OTRS_VERSION 4.0.16
 ENV SUB_OTRS_VERSION -01
 ENV OTRS_ROOT /opt/otrs/
 
+ADD addon/Znuny4OTRS-Repo-2.0.25.opm Znuny4OTRS-Repo-2.0.25.opm
+ADD addon/Znuny4OTRS-MarkTicketSeenUnseen-1.1.0.opm Znuny4OTRS-MarkTicketSeenUnseen-1.1.0.opm
+ADD addon/Znuny4OTRS-SortByLastContact-3.2.1.opm Znuny4OTRS-SortByLastContact-3.2.1.opm
+ADD addon/FAQ-4.0.5.opm FAQ-4.0.5.opm
+
 RUN yum install -y epel-release && \ 
     yum update -y && \
     yum -y install cronie httpd httpd-devel mysql mod_perl mod_ssl mod_rewrite \ 
@@ -21,11 +26,6 @@ RUN yum install -y epel-release && \
     supervisor tar which wget git sendmail sendmail-cf
 
 RUN yum install -y http://ftp.otrs.org/pub/otrs/RPMS/rhel/6/otrs-${OTRS_VERSION}${SUB_OTRS_VERSION}.noarch.rpm
-
-ADD addon/Znuny4OTRS-Repo-2.0.25.opm Znuny4OTRS-Repo-2.0.25.opm
-ADD addon/Znuny4OTRS-MarkTicketSeenUnseen-1.1.0.opm Znuny4OTRS-MarkTicketSeenUnseen-1.1.0.opm
-ADD addon/Znuny4OTRS-SortByLastContact-3.2.1.opm Znuny4OTRS-SortByLastContact-3.2.1.opm
-ADD addon/FAQ-4.0.5.opm FAQ-4.0.5.opm
 
 #Add configuration file
 ADD config/Config.pm ${OTRS_ROOT}Kernel/Config.pm
