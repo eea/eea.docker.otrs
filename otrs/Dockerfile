@@ -25,7 +25,7 @@ RUN yum install -y http://ftp.otrs.org/pub/otrs/RPMS/rhel/6/otrs-${OTRS_VERSION}
 COPY addon/Znuny4OTRS-Repo-2.0.25.opm Znuny4OTRS-Repo-2.0.25.opm
 COPY addon/Znuny4OTRS-MarkTicketSeenUnseen-1.1.0.opm Znuny4OTRS-MarkTicketSeenUnseen-1.1.0.opm
 COPY addon/Znuny4OTRS-SortByLastContact-3.2.1.opm Znuny4OTRS-SortByLastContact-3.2.1.opm
-COPY addon/FAQ-4.0.3.opm FAQ-4.0.3.opm
+COPY addon/FAQ-4.0.5.opm FAQ-4.0.5.opm
 
 #Add configuration file
 COPY config/Config.pm ${OTRS_ROOT}Kernel/Config.pm

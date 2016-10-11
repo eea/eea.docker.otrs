@@ -38,7 +38,7 @@ fi
 ${OTRS_ROOT}bin/otrs.PackageManager.pl -a install -p Znuny4OTRS-Repo-2.0.25.opm
 ${OTRS_ROOT}bin/otrs.PackageManager.pl -a install -p Znuny4OTRS-MarkTicketSeenUnseen-1.1.0.opm
 ${OTRS_ROOT}bin/otrs.PackageManager.pl -a install -p Znuny4OTRS-SortByLastContact-3.2.1.opm
-${OTRS_ROOT}bin/otrs.PackageManager.pl -a install -p FAQ-4.0.3.opm
+${OTRS_ROOT}bin/otrs.PackageManager.pl -a install -p FAQ-4.0.5.opm
 
 #OTRS4
 ${OTRS_ROOT}bin/znuny.UpdateLastCustomerContact.pl
