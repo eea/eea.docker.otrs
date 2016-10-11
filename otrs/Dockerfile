@@ -22,18 +22,18 @@ RUN yum install -y epel-release && \
 
 RUN yum install -y http://ftp.otrs.org/pub/otrs/RPMS/rhel/6/otrs-${OTRS_VERSION}${SUB_OTRS_VERSION}.noarch.rpm
 
-COPY addon/Znuny4OTRS-Repo-2.0.25.opm Znuny4OTRS-Repo-2.0.25.opm
-COPY addon/Znuny4OTRS-MarkTicketSeenUnseen-1.1.0.opm Znuny4OTRS-MarkTicketSeenUnseen-1.1.0.opm
-COPY addon/Znuny4OTRS-SortByLastContact-3.2.1.opm Znuny4OTRS-SortByLastContact-3.2.1.opm
-COPY addon/FAQ-4.0.5.opm FAQ-4.0.5.opm
+ADD addon/Znuny4OTRS-Repo-2.0.25.opm Znuny4OTRS-Repo-2.0.25.opm
+ADD addon/Znuny4OTRS-MarkTicketSeenUnseen-1.1.0.opm Znuny4OTRS-MarkTicketSeenUnseen-1.1.0.opm
+ADD addon/Znuny4OTRS-SortByLastContact-3.2.1.opm Znuny4OTRS-SortByLastContact-3.2.1.opm
+ADD addon/FAQ-4.0.5.opm FAQ-4.0.5.opm
 
 #Add configuration file
-COPY config/Config.pm ${OTRS_ROOT}Kernel/Config.pm
-COPY config/ZZZAuto.pm ${OTRS_ROOT}Kernel/Config/Files/ZZZAuto.pm
-COPY config/GenericAgent.pm ${OTRS_ROOT}Kernel/Config/GenericAgent.pm
-COPY config/OutOfOffice.xml ${OTRS_ROOT}Kernel/Config/Files/OutOfOffice.xml
-COPY config/FollowUp.pm ${OTRS_ROOT}Kernel/System/PostMaster/FollowUp.pm
-COPY config/Core.Agent.js ${OTRS_ROOT}var/httpd/htdocs/js/Core.Agent.js
+ADD config/Config.pm ${OTRS_ROOT}Kernel/Config.pm
+ADD config/ZZZAuto.pm ${OTRS_ROOT}Kernel/Config/Files/ZZZAuto.pm
+ADD config/GenericAgent.pm ${OTRS_ROOT}Kernel/Config/GenericAgent.pm
+ADD config/OutOfOffice.xml ${OTRS_ROOT}Kernel/Config/Files/OutOfOffice.xml
+ADD config/FollowUp.pm ${OTRS_ROOT}Kernel/System/PostMaster/FollowUp.pm
+ADD config/Core.Agent.js ${OTRS_ROOT}var/httpd/htdocs/js/Core.Agent.js
 
 RUN cd /etc/mail && \
     rm virtusertable.db && \
@@ -41,12 +41,12 @@ RUN cd /etc/mail && \
     cd - 
 
 #COPY config/local-host-names /etc/mail/local-host-names
-COPY config/sendmail.mc /etc/mail/sendmail.mc
+ADD config/sendmail.mc /etc/mail/sendmail.mc
 #COPY config/virtusertable /etc/mail/virtusertable
 
 #httpd configuration file SSL
-COPY config/zzz_otrs.conf /etc/httpd/conf.d/zzz_otrs.conf
-COPY config/ssl.conf /etc/httpd/conf.d/ssl.conf
+ADD config/zzz_otrs.conf /etc/httpd/conf.d/zzz_otrs.conf
+ADD config/ssl.conf /etc/httpd/conf.d/ssl.conf
 
 #Add change email fetch time script
 #COPY otrs_postmaster_time.sh ${OTRS_ROOT}scripts/
@@ -64,7 +64,7 @@ RUN sed -i -e '/pam_loginuid.so/ s/^#*/#/' /etc/pam.d/crond
 
 #Configure supervisord
 RUN sed -i -e "s/^nodaemon=false/nodaemon=true/" /etc/supervisord.conf
-COPY etc/supervisord.d/otrs.ini /etc/supervisord.d/
+ADD etc/supervisord.d/otrs.ini /etc/supervisord.d/
 RUN cat /etc/supervisord.d/otrs.ini >> etc/supervisord.conf
 
 #Fix PostmasterFollowUpState config var, this line on Ticket.xml disallow the edition
@@ -74,7 +74,7 @@ RUN sed -i -e '/<ValidateModule>Kernel::System::SysConfig::StateValidate<\/Valid
 RUN mkdir -p ${OTRS_ROOT}var/{run,tmp}/
 
 #Add run script
-COPY run.sh /
+ADD run.sh /
 RUN chmod 755 /*.sh
 
 RUN usermod -G apache otrs
