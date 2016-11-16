@@ -47,6 +47,7 @@ ADD config/sendmail.mc /etc/mail/sendmail.mc
 #httpd configuration file SSL
 ADD config/zzz_otrs.conf /etc/httpd/conf.d/zzz_otrs.conf
 ADD config/ssl.conf /etc/httpd/conf.d/ssl.conf
+ADD config/mod_headers.conf /etc/httpd/conf.d/mod_headers.conf
 
 #Add change email fetch time script
 #COPY otrs_postmaster_time.sh ${OTRS_ROOT}scripts/
