@@ -44,7 +44,7 @@ RUN cd /etc/mail && \
 ADD config/sendmail.mc /etc/mail/sendmail.mc
 #COPY config/virtusertable /etc/mail/virtusertable
 
-#httpd configuration file SSL
+##httpd configuration file SSL
 ADD config/zzz_otrs.conf /etc/httpd/conf.d/zzz_otrs.conf
 ADD config/ssl.conf /etc/httpd/conf.d/ssl.conf
 ADD config/mod_headers.conf /etc/httpd/conf.d/mod_headers.conf
@@ -81,4 +81,5 @@ RUN chmod 755 /*.sh
 RUN usermod -G apache otrs
 
 EXPOSE 80 443 25
+
 CMD ["/run.sh"]
