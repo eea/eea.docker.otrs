@@ -4,8 +4,8 @@ FROM centos:6.8
 
 MAINTAINER michimau <mauro.michielon@eea.europa.eu>
 
-ENV OTRS_VERSION 4.0.16
-ENV SUB_OTRS_VERSION -01
+ENV OTRS_VERSION 4.0.19
+ENV SUB_OTRS_VERSION -02
 ENV OTRS_ROOT /opt/otrs/
 
 ADD addon/Znuny4OTRS-Repo-2.0.25.opm Znuny4OTRS-Repo-2.0.25.opm
