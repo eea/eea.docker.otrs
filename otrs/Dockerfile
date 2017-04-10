@@ -4,14 +4,14 @@ FROM centos:6.8
 
 MAINTAINER michimau <mauro.michielon@eea.europa.eu>
 
-ENV OTRS_VERSION 4.0.19
-ENV SUB_OTRS_VERSION -02
+ENV OTRS_VERSION 4.0.23
+ENV SUB_OTRS_VERSION -01
 ENV OTRS_ROOT /opt/otrs/
 
 ADD addon/Znuny4OTRS-Repo-2.0.25.opm Znuny4OTRS-Repo-2.0.25.opm
 ADD addon/Znuny4OTRS-MarkTicketSeenUnseen-1.1.0.opm Znuny4OTRS-MarkTicketSeenUnseen-1.1.0.opm
 ADD addon/Znuny4OTRS-SortByLastContact-3.2.1.opm Znuny4OTRS-SortByLastContact-3.2.1.opm
-ADD addon/FAQ-4.0.5.opm FAQ-4.0.5.opm
+ADD addon/FAQ-4.0.91.opm FAQ-4.0.91.opm
 
 RUN yum install -y epel-release && \ 
     yum update -y && \
