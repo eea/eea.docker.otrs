@@ -43,6 +43,7 @@ follows [semantic versioning](http://semver.org/) principles.  Here is how you d
     in case there's no automatic build on docker hub:
     docker build -t eeacms/eea-otrs:latest otrs
     docker tag eeacms/eea-otrs:latest eeacms/eea-otrs:$version
+    docker login --username=<user username> --email=<user email address>
     docker push eeacms/eea-otrs:latest
     docker push eeacms/eea-otrs:$version
 
