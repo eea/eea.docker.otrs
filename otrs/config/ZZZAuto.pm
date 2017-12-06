@@ -454,7 +454,7 @@ $Self->{'Frontend::Themes'} =  {
 $Self->{'Customer::AuthModule::LDAP::AlwaysFilter'} =  '';
 $Self->{'Customer::AuthModule::LDAP::UID'} =  'uid';
 $Self->{'Customer::AuthModule::LDAP::BaseDN'} =  'ou=Users,o=Eionet,l=Europe';
-$Self->{'Customer::AuthModule::LDAP::Host'} =  'ldap3.eionet.europa.eu';
+$Self->{'Customer::AuthModule::LDAP::Host'} =  'ldaps://ldap_host';
 $Self->{'Customer::AuthModule'} =  'Kernel::System::CustomerAuth::LDAP';
 $Self->{'CustomerPanelBodyNewAccount'} =  'Hi <OTRS_USERFIRSTNAME>,
 

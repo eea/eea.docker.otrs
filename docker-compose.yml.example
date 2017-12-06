@@ -20,6 +20,9 @@ otrs:
 #  - /mnt/otrsData/ArticleStorageFS:/opt/otrs/var/article
   - /home/michimau/otrsData/ArticleStorageFS:/opt/otrs/var/article
   - /etc/localtime:/etc/localtime:ro
+  - changeme:/ssl/server.crt:ro
+  - changeme:/ssl/server.key:ro
+  - changeme:/ssl/server-chain.crt:ro
 
   environment:
     OTRS_DB_PASSWORD: changeme
@@ -31,30 +34,6 @@ otrs:
     MAIL_ADDRESSES: @changeme.changeme.com changeme@changeme.com
 
     SERVER_NAME: changeme 
-
-    SSL_KEY: |-
-        -----BEGIN RSA PRIVATE KEY-----
-        changemechangemechangemechangemechangemechangemechangemechangeme
-        changemechangemechangemechangemechangemechangemechangemechangeme
-        changemechangemechangemechangemechangemechangemechangemechangeme
-        changemechangemechangemechangemechangemechangemechangemechangeme
-        -----END RSA PRIVATE KEY-----
-
-    SSL_CERT: |-
-        -----BEGIN CERTIFICATE-----
-        changemechangemechangemechangemechangemechangemechangemechangeme
-        changemechangemechangemechangemechangemechangemechangemechangeme
-        changemechangemechangemechangemechangemechangemechangemechangeme
-        changemechangemechangemechangemechangemechangemechangemechangeme
-        -----END CERTIFICATE-----
-
-    AUTH_CERT: |-
-        -----BEGIN CERTIFICATE-----
-        changemechangemechangemechangemechangemechangemechangemechangeme
-        changemechangemechangemechangemechangemechangemechangemechangeme
-        changemechangemechangemechangemechangemechangemechangemechangeme
-        changemechangemechangemechangemechangemechangemechangemechangeme
-        -----END CERTIFICATE-----
 
 mariadb:
   restart: always

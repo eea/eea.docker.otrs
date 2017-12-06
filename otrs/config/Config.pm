@@ -58,14 +58,15 @@ sub Load {
     # $Self->{CheckMXRecord} = 0;
 
     $Self->{'AuthModule1'} = 'Kernel::System::Auth::LDAP';
-    $Self->{'AuthModule::LDAP::Host1'} = 'ldap_host';
+    $Self->{'AuthModule::LDAP::Host1'} = 'ldaps://ldap_host';
     $Self->{'AuthModule::LDAP::BaseDN1'} = 'ou=Users,o=Eionet,l=Europe';
     $Self->{'AuthModule::LDAP::UID1'} = 'uid';
     $Self->{'AuthModule::LDAP::AlwaysFilter1'} = '';
     $Self->{'AuthModule::LDAP::SearchUserDN'} = 'cn=Accounts browser,o=EIONET,l=Europe';
     $Self->{'AuthModule::LDAP::SearchUserPw'} = 'ldap_password';
     $Self->{'AuthModule::LDAP::Params1'} = {
-        port => 389,
+        verify => 'none',
+        port => 636,
         timeout => 120,
         async => 0,
         version => 3,
@@ -73,7 +74,7 @@ sub Load {
 
     # agent data sync against ldap
     $Self->{'AuthSyncModule'} = 'Kernel::System::Auth::Sync::LDAP';
-    $Self->{'AuthSyncModule::LDAP::Host'} = 'ldap://ldap_host';
+    $Self->{'AuthSyncModule::LDAP::Host'} = 'ldaps://ldap_host';
     $Self->{'AuthSyncModule::LDAP::BaseDN'} = 'ou=Users,o=Eionet,l=Europe';
     $Self->{'AuthSyncModule::LDAP::UID'} = 'uid';
     $Self->{'AuthSyncModule::LDAP::SearchUserDN'} = 'cn=Accounts browser,o=EIONET,l=Europe';
@@ -173,7 +174,7 @@ $Self->{CustomerUser2} = {
     Name => 'LDAP Datasource',
     Module => 'Kernel::System::CustomerUser::LDAP',
     Params => {
-        Host => 'ldap_host',
+        Host => 'ldaps://ldap_host',
         BaseDN => 'ou=Users,o=Eionet,l=Europe',
 
         # search scope (one|sub)
@@ -190,7 +191,8 @@ $Self->{CustomerUser2} = {
 
         # Net::LDAP new params (if needed - for more info see perldoc Net::LDAP)
         Params => {
-            port => 389,
+            verify => 'none',
+            port => 636,
             timeout => 120,
             async => 0,
             version => 3,

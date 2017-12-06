@@ -17,8 +17,8 @@ done
 sed "s#otrs_db_password#$OTRS_DB_PASSWORD#g" -i ${OTRS_ROOT}Kernel/Config.pm
 sed "s#ldap_password#$LDAP_PASSWORD#g" -i ${OTRS_ROOT}Kernel/Config.pm
 sed "s#ldap_host#$LDAP_HOST#g" -i ${OTRS_ROOT}Kernel/Config.pm
+sed "s#ldap_host#$LDAP_HOST#g" -i ${OTRS_ROOT}Kernel/Config/Files/ZZZAuto.pm
 sed "s#mtp_relay#$MTP_RELAY#g" -i ${OTRS_ROOT}Kernel/Config/Files/ZZZAuto.pm
-
 
 sed "s#host_ip_address#$SERVER_NAME#g" -i /etc/httpd/conf.d/zzz_otrs.conf
 
@@ -62,9 +62,16 @@ done
 ${OTRS_ROOT}bin/otrs.SetPermissions.pl --otrs-user=otrs --web-group=apache /opt/otrs
 
 #SSL
-echo "$SSL_CERT" > /etc/pki/tls/certs/star-eionet2012.crt
-echo "$SSL_KEY" > /etc/pki/tls/private/star-eionet2012.key
-echo "$AUTH_CERT" > /etc/pki/tls/certs/rapidssl_ca.crt
+#echo "$SSL_CERT" > /etc/pki/tls/certs/star-eionet2012.crt
+#echo "$SSL_KEY" > /etc/pki/tls/private/star-eionet2012.key
+#echo "$AUTH_CERT" > /etc/pki/tls/certs/rapidssl_ca.crt
+
+cat /ssl/server.crt > /etc/pki/tls/certs/star-eionet2012.crt
+cat /ssl/server.key > /etc/pki/tls/private/star-eionet2012.key
+cat /ssl/server-chain.crt > /etc/pki/tls/certs/rapidssl_ca.crt
+
+chmod 400 /etc/pki/tls/certs/*
+chmod 400 /etc/pki/tls/private/*
 
 touch /var/log/otrs.log
 chown otrs /var/log/otrs.log
