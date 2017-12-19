@@ -20,6 +20,30 @@ Please create a new ticket via the customer panel.
 Thanks for your help!
 
  Your Helpdesk Team';
+$Self->{'Frontend::Module'}->{'AgentTicketSearch'} =  {
+  'Description' => 'Search Ticket',
+  'Loader' => {
+    'JavaScript' => [
+      'Core.UI.AllocationList.js',
+      'Core.Agent.TableFilters.js'
+    ]
+  },
+  'NavBar' => [
+    {
+      'AccessKey' => 's',
+      'Block' => '',
+      'Description' => 'Search Tickets',
+      'Link' => 'Action=AgentTicketSearch',
+      'LinkOption' => 'onclick="window.setTimeout(function(){Core.Agent.Search.OpenSearchDialog(\'AgentTicketSearch\');}, 0); return false;"',
+      'Name' => 'Search',
+      'NavBar' => 'Ticket',
+      'Prio' => '130',
+      'Type' => ''
+    }
+  ],
+  'NavBarName' => 'Ticket',
+  'Title' => 'Search'
+};
 $Self->{'Frontend::Module'}->{'AgentTicketEmail'} =  {
   'Description' => 'Create new email ticket',
   'Loader' => {
