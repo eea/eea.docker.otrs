@@ -1,94 +1,87 @@
-otrs:
-  build: otrs
-  restart: always
-  ports:
-  - "80:80"
-  - "443:443"
-  - "25:25"
-  
-  hostname: changeme
-  domainname: changeme.com
+version: '2'
+services:
+  mariadb:
+    image: mariadb:5.5.58
+    environment:
+      MYSQL_ROOT_PASSWORD: changeme
+      TZ: Europe/Copenhagen
+    volumes:
+    - helpdesk-eionet-mysql:/var/lib/mysql
+    - helpdesk-eionet-backups:/backups
+    mem_reservation: 4294967296
+    command:
+    - mysqld
+    - --default_storage_engine=InnoDB
+    - --character-set-server=utf8
+    - --collation-server=utf8_general_ci
+    - --init-connect=SET NAMES utf8
+    - --innodb_log_file_size=256M
+    - --innodb_buffer_pool_size=3GB
+    - --max_allowed_packet=20M
+    - --bulk_insert_buffer_size=20M
+    - --query_cache_size=32M
+    - --skip-character-set-client-handshake
+    - --skip-host-cache
+    - --wait_timeout=600
+    networks:
+      - helpdesk-eionet-network
+    labels:
+      io.rancher.scheduler.affinity:host_label: hostname=changeme
 
-  links:
-  - mariadb:mariadb
-  - postfix:postfix
+  otrs:
+    mem_limit: 3221225472
+    image: eeacms/eea-otrs:v1.1.12
+    hostname: helpdesk
+    environment:
+      LDAP_HOST: changeme
+      LDAP_PASSWORD: changeme
+      MAIL_ADDRESSES: '@myhost.mydomain @url_service'
+      MTP_RELAY: postfix
+      OTRS_DB_PASSWORD: changeme
+      OTRS_ROOT_PASSWORD: changeme
+      MYSQL_ROOT_PASSWORD: changeme #must match with above
+      SERVER_NAME: myserver
+      TZ: Europe/Copenhagen
+    depends_on:
+      - "mariadb"
+      - "postfix"
+    volumes:
+    - helpdesk-eionet-backups:/backups
+    - /etc/localtime:/etc/localtime:ro
+    - /etc/pki/tls/certs/server-eionet.crt:/ssl/server.crt:ro
+    - /etc/pki/tls/private/server-eionet.key:/ssl/server.key:ro
+    - /etc/pki/tls/certs/server-chain-eionet.crt:/ssl/server-chain.crt:ro
+    domainname: changeme
+    ports:
+    - 80:80
+    - 443:443
+    - '25:25'
+    networks:
+      - helpdesk-eionet-network
+    labels:
+      io.rancher.scheduler.affinity:host_label: hostname=changeme
 
-#  - memory_limit=35000
+  postfix:
+    image: eeacms/postfix:eionet
+    environment:
+      MTP_PASS: changeme
+      MTP_RELAY: changeme
+      MTP_USER: changeme
+      TZ: Europe/Copenhagen
+    networks:
+      - helpdesk-eionet-network
+    labels:
+      io.rancher.scheduler.affinity:host_label: hostname=changeme
 
-  volumes:
-  - /backups:/backups
-#  - /mnt/otrsData/ArticleStorageFS:/opt/otrs/var/article
-  - /home/michimau/otrsData/ArticleStorageFS:/opt/otrs/var/article
-  - /etc/localtime:/etc/localtime:ro
-  - changeme:/ssl/server.crt:ro
-  - changeme:/ssl/server.key:ro
-  - changeme:/ssl/server-chain.crt:ro
+volumes:
+    helpdesk-eionet-backups:
+       driver: local
+    helpdesk-eionet-mysql:
+       driver: local
 
-  environment:
-    OTRS_DB_PASSWORD: changeme
-    OTRS_ROOT_PASSWORD: changeme
-    LDAP_HOST: changeme
-    LDAP_PASSWORD: changeme
-    #MTP_RELAY to match what you have defined in the Dockerfile of Postfix
-    MTP_RELAY: changeme.com
-    MAIL_ADDRESSES: @changeme.changeme.com changeme@changeme.com
+networks:
+  helpdesk-eionet-network:
+    driver: bridge
+#    driver_opts:
+#      com.docker.network.driver.mtu: 1450
 
-    SERVER_NAME: changeme 
-
-mariadb:
-  restart: always
-  image: mariadb:5.5
-#  expose:
-#  - "3306"
-
-# InnoDB is enabled by default with a 10MB datafile in /var/lib/mysql/.
-# Read the manual for more InnoDB related options. There are many!
-# you can't just change log file size, requires special procedure
-  command:
-  - mysqld
-  - --default_storage_engine=InnoDB
-  - --character-set-server=utf8
-  - --collation-server=utf8_general_ci
-  - --init-connect=SET NAMES utf8
-  - --innodb_log_file_size=256M
-  - --innodb_buffer_pool_size=3GB
-  - --max_allowed_packet=20M
-  - --bulk_insert_buffer_size=20M
-  - --query_cache_size=32M
-  - --skip-character-set-client-handshake
-  - --skip-host-cache
-  - --wait_timeout=600
-# - --init-connect=SET NAMES utf8; SET collation_connection = utf8_unicode_ci
-
-  volumes_from:
-  - otrsdata
-  volumes:
-  - /etc/localtime:/etc/localtime:ro
-# - /backups:/backups:ro
-
-  labels:
-    io.rancher.scheduler.affinity:host_label: hostname=changeme
-    io.rancher.sidekicks: otrsdata
-
-  environment:
-    MYSQL_ROOT_PASSWORD: changeme
-
-otrsdata:
-  image: tianon/true:latest
-  volumes:
-  - helpdesk-eionet-mysql:/var/lib/mysql
-  labels:
-    io.rancher.container.start_once: "true"
-    io.rancher.scheduler.affinity:host_label: hostname=changeme
-
-postfix:
-  restart: always
-  image: eeacms/postfix:eionet
-  volumes:
-  - /etc/localtime:/etc/localtime:ro
-
-  environment:
-    MTP_USER: changeme
-    MTP_PASS: changeme
-  labels:
-    io.rancher.scheduler.affinity:host_label: hostname=changeme

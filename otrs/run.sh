@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mysqlcmd="mysql -uroot -h $MARIADB_PORT_3306_TCP_ADDR -p$MARIADB_ENV_MYSQL_ROOT_PASSWORD "
+mysqlcmd="mysql -uroot -hmariadb -p$MYSQL_ROOT_PASSWORD "
 
 while true; do
   out="`$mysqlcmd -e "SELECT COUNT(*) FROM mysql.user;" 2>&1`"
@@ -31,9 +31,10 @@ if [ $? -ne 0  ]; then
 
   $mysqlcmd otrs < ${OTRS_ROOT}scripts/database/otrs-schema.mysql.sql
   $mysqlcmd otrs < ${OTRS_ROOT}scripts/database/otrs-initial_insert.mysql.sql
-  echo -e "Setting password for default admin account root@localhost..."
-  ${OTRS_ROOT}bin/otrs.SetPassword.pl --agent root@localhost $OTRS_ROOT_PASSWORD
 fi
+
+echo -e "Setting password for default admin account root@localhost..."
+${OTRS_ROOT}bin/otrs.SetPassword.pl --agent root@localhost $OTRS_ROOT_PASSWORD
 
 ${OTRS_ROOT}bin/otrs.PackageManager.pl -a install -p Znuny4OTRS-Repo-2.0.25.opm
 ${OTRS_ROOT}bin/otrs.PackageManager.pl -a install -p Znuny4OTRS-MarkTicketSeenUnseen-1.1.0.opm
