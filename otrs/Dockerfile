@@ -4,7 +4,7 @@ FROM centos:6.8
 
 MAINTAINER michimau <mauro.michielon@eea.europa.eu>
 
-ENV OTRS_VERSION 4.0.31
+ENV OTRS_VERSION 4.0.32
 ENV SUB_OTRS_VERSION -01
 ENV OTRS_ROOT /opt/otrs/
 
