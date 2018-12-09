@@ -1,6 +1,3 @@
-#OTRS ticketing system docker image.
-#FROM centos:6.6
-#FROM centos:6.8
 #FROM centos:7
 FROM fedora:28
 
@@ -52,6 +49,7 @@ ADD config/zzz_otrs.conf /etc/httpd/conf.d/zzz_otrs.conf
 ADD config/ssl.conf /etc/httpd/conf.d/ssl.conf
 ADD config/mod_headers.conf /etc/httpd/conf.d/mod_headers.conf
 
+RUN echo "LoadModule http2_module modules/mod_http2.so" >> /etc/httpd/conf.modules.d/00-base.conf
 #Add change email fetch time script
 #COPY otrs_postmaster_time.sh ${OTRS_ROOT}scripts/
 RUN chmod 755 ${OTRS_ROOT}scripts/*.sh
