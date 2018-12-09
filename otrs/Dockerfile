@@ -1,6 +1,8 @@
 #OTRS ticketing system docker image.
 #FROM centos:6.6
-FROM centos:6.8
+#FROM centos:6.8
+#FROM centos:7
+FROM fedora:28
 
 MAINTAINER michimau <mauro.michielon@eea.europa.eu>
 
@@ -13,9 +15,10 @@ ADD addon/Znuny4OTRS-MarkTicketSeenUnseen-1.1.0.opm Znuny4OTRS-MarkTicketSeenUns
 ADD addon/Znuny4OTRS-SortByLastContact-3.2.1.opm Znuny4OTRS-SortByLastContact-3.2.1.opm
 ADD addon/FAQ-4.0.91.opm FAQ-4.0.91.opm
 
+RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm --allowerasing
 RUN yum install -y epel-release && \ 
     yum update -y && \
-    yum -y install cronie httpd httpd-devel mysql mod_perl mod_ssl mod_rewrite \ 
+    yum -y install cronie httpd httpd-devel mysql mod_perl mod_ssl \ 
     perl-core "perl(Crypt::SSLeay)" "perl(Net::LDAP)" "perl(URI)" \ 
     procmail "perl(Date::Format)" "perl(LWP::UserAgent)" \ 
     "perl(Net::DNS)" "perl(IO::Socket::SSL)" "perl(XML::Parser)" \ 
@@ -25,7 +28,7 @@ RUN yum install -y epel-release && \
     "perl(Text::CSV_XS)" "perl(YAML::XS)" "perl(Text::CSV_XS)" "perl(DBD::mysql)" \
     supervisor tar which wget git sendmail sendmail-cf openssl-perl perl-IO-Socket-SSL
 
-RUN yum install -y http://ftp.otrs.org/pub/otrs/RPMS/rhel/6/otrs-${OTRS_VERSION}${SUB_OTRS_VERSION}.noarch.rpm
+RUN yum install -y http://ftp.otrs.org/pub/otrs/RPMS/rhel/7/otrs-${OTRS_VERSION}${SUB_OTRS_VERSION}.noarch.rpm
 
 #Add configuration file
 ADD config/Config.pm ${OTRS_ROOT}Kernel/Config.pm
