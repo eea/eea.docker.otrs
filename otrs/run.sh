@@ -22,6 +22,8 @@ sed "s#mtp_relay#$MTP_RELAY#g" -i ${OTRS_ROOT}Kernel/Config/Files/ZZZAuto.pm
 
 sed "s#host_ip_address#$SERVER_NAME#g" -i /etc/httpd/conf.d/zzz_otrs.conf
 
+sed "s#User apache#User otrs#g" -i /etc/httpd/conf/httpd.conf
+
 # Redundant creation of database: Use MYSQL_USER, MYSQL_PASSWORD and MYSQL_DATABASE
 $mysqlcmd -e 'use otrs'
 if [ $? -ne 0  ]; then
