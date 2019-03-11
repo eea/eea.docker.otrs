@@ -376,7 +376,7 @@ $Self->{'Ticket::Frontend::AgentTicketNote'}->{'State'} =  '1';
 delete $Self->{'Ticket::Frontend::AgentTicketClose'}->{'NoteMandatory'};
 $Self->{'Ticket::Frontend::TimeUnits'} =  '(work units)';
 $Self->{'Ticket::Frontend::OverviewSmall'}->{'ColumnHeader'} =  'TicketTitle';
-$Self->{'ArticleDir'} =  '/opt/otrs/var/article';
+$Self->{'ArticleDir'} =  '/article';
 $Self->{'Ticket::StorageModule'} =  'Kernel::System::Ticket::ArticleStorageFS';
 $Self->{'Ticket::IndexModule'} =  'Kernel::System::Ticket::IndexAccelerator::StaticDB';
 $Self->{'Frontend::Module'}->{'AdminGenericInterfaceMappingSimple'} =  {
