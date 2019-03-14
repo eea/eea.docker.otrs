@@ -67,7 +67,7 @@ RUN sed -i -e '/pam_loginuid.so/ s/^#*/#/' /etc/pam.d/crond
 #Configure supervisord
 RUN sed -i -e "s/^nodaemon=false/nodaemon=true/" /etc/supervisord.conf
 ADD etc/supervisord.d/otrs.ini /etc/supervisord.d/
-RUN cat /etc/supervisord.d/otrs.ini >> etc/supervisord.conf
+#RUN cat /etc/supervisord.d/otrs.ini >> etc/supervisord.conf
 
 #Fix PostmasterFollowUpState config var, this line on Ticket.xml disallow the edition
 #of that field through SysConfig
