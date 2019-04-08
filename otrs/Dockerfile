@@ -25,11 +25,9 @@ ADD addon/ addon/
 
 #Add configuration file
 ADD config/Config.pm ${OTRS_ROOT}Kernel/Config.pm
-#ADD config/ZZZAuto.pm ${OTRS_ROOT}Kernel/Config/Files/ZZZAuto.pm
-#ADD config/GenericAgent.pm ${OTRS_ROOT}Kernel/Config/GenericAgent.pm
 #ADD config/OutOfOffice.xml ${OTRS_ROOT}Kernel/Config/Files/OutOfOffice.xml
-#ADD config/FollowUp.pm ${OTRS_ROOT}Kernel/System/PostMaster/FollowUp.pm
-ADD config/Core.Agent.js ${OTRS_ROOT}var/httpd/htdocs/js/Core.Agent.js
+ADD config/logo_agent.png /opt/otrs/var/httpd/htdocs/skins/Agent/default/img/
+ADD config/logo_customer.png /opt/otrs/var/httpd/htdocs/skins/Customer/default/img/
 
 RUN cd /etc/mail && \
     rm virtusertable.db && \
@@ -39,10 +37,6 @@ RUN cd /etc/mail && \
 ADD config/sendmail.mc /etc/mail/sendmail.mc
 
 ##httpd configuration file SSL
-#ADD config/zzz_otrs.conf /etc/httpd/conf.d/zzz_otrs.conf
-#ADD config/ssl.conf /etc/httpd/conf.d/ssl.conf
-#ADD config/mod_headers.conf /etc/httpd/conf.d/mod_headers.conf
-
 ADD config/*.conf /etc/httpd/conf.d/
 ADD etc/supervisord.d/otrs.ini /etc/supervisord.d/
 
@@ -62,7 +56,7 @@ RUN sed -i -e '/<ValidateModule>Kernel::System::SysConfig::StateValidate<\/Valid
 
 RUN mkdir -p ${OTRS_ROOT}var/{run,tmp}/
 
-RUN git clone -b otrs4 https://github.com/eea/eionet.otrs.theme.git
+#RUN git clone -b otrs4 https://github.com/eea/eionet.otrs.theme.git
 #ADD eionet.otrs.theme  /eionet.otrs.theme
 
 #Add run script

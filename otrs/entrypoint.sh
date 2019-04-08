@@ -64,8 +64,8 @@ ${OTRS_ROOT}bin/otrs.RebuildConfig.pl
 ${OTRS_ROOT}bin/otrs.RebuildTicketIndex.pl
 
 #git clone -b otrs4 https://github.com/eea/eionet.otrs.theme.git
-chmod 755 /eionet.otrs.theme/install.sh
-cd eionet.otrs.theme && ./install.sh
+#chmod 755 /eionet.otrs.theme/install.sh
+#cd eionet.otrs.theme && ./install.sh
 
 ${OTRS_ROOT}bin/otrs.SetPermissions.pl --otrs-user=otrs --web-group=apache /opt/otrs
 
@@ -91,5 +91,20 @@ do
 done
 ( cd /etc/mail ; make )
 sed -e 's#  *#\n#g'  <<< "$MAIL_ADDRESSES" | sed -e 's#.*@##' |sort|uniq > /etc/mail/local-host-names
+
+for filename in /opt/otrs/var/httpd/htdocs/skins/Customer/default/css/*.css; do
+#echo $filename
+sed -i 's/f92/18898b/g' $filename
+sed -i 's/F92/18898b/g' $filename
+sed -i 's/FF9922/18898b/g' $filename
+done
+
+for filename in /opt/otrs/var/httpd/htdocs/skins/Agent/default/css/*.css; do
+#echo $filename
+sed -i 's/f92/18898b/g' $filename
+sed -i 's/F92/18898b/g' $filename
+sed -i 's/FF9922/18898b/g' $filename
+done
+
 
 supervisord
