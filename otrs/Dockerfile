@@ -62,8 +62,8 @@ RUN sed -i -e '/<ValidateModule>Kernel::System::SysConfig::StateValidate<\/Valid
 
 RUN mkdir -p ${OTRS_ROOT}var/{run,tmp}/
 
-#RUN git clone -b otrs4 https://github.com/eea/eionet.otrs.theme.git
-ADD eionet.otrs.theme  /eionet.otrs.theme
+RUN git clone -b otrs4 https://github.com/eea/eionet.otrs.theme.git
+#ADD eionet.otrs.theme  /eionet.otrs.theme
 
 #Add run script
 ADD entrypoint.sh /
