@@ -46,6 +46,7 @@ services:
       - "mariadb"
       - "postfix"
     volumes:
+    - helpdesk-eionet-kernel-config:/opt/otrs/Kernel
     - helpdesk-eionet-backups:/backups
     - /etc/localtime:/etc/localtime:ro
     - /etc/pki/tls/certs/server-eionet.crt:/ssl/server.crt:ro
@@ -78,6 +79,9 @@ volumes:
        driver: local
     helpdesk-eionet-mysql:
        driver: local
+    helpdesk-eionet-kernel-config:
+       driver: local
+
 
 networks:
   helpdesk-eionet-network:
