@@ -83,4 +83,32 @@ done
 ( cd /etc/mail ; make )
 sed -e 's#  *#\n#g'  <<< "$MAIL_ADDRESSES" | sed -e 's#.*@##' |sort|uniq > /etc/mail/local-host-names
 
+
+for filename in /opt/otrs/var/httpd/htdocs/skins/Customer/default/css/*.css; do
+echo $filename
+sed -i 's/f92/18898a/g' $filename
+sed -i 's/F92/18898b/g' $filename
+sed -i 's/FF9922/18898c/g' $filename
+sed -i 's/F72/e6f2ff/g' $filename
+sed -i 's/FCB24B/C0C0C0/g' $filename
+sed -i 's/F39C19/303030/g' $filename
+
+done
+
+for filename in /opt/otrs/var/httpd/htdocs/skins/Agent/default/css/*.css; do
+echo $filename
+sed -i 's/f92/18898a/g' $filename
+sed -i 's/F92/18898b/g' $filename
+sed -i 's/FF9922/18898c/g' $filename
+sed -i 's/F72/e6f2ff/g' $filename
+sed -i 's/FCB24B/C0C0C0/g' $filename
+sed -i 's/F39C19/303030/g' $filename
+
+done
+
+rm -rf /opt/otrs/var/httpd/htdocs/skins/Agent/default/css-cache/*
+
+
+
+
 supervisord
