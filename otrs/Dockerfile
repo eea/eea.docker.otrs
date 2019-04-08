@@ -23,9 +23,7 @@ RUN yum install -y http://ftp.otrs.org/pub/otrs/RPMS/rhel/7/otrs-${OTRS_VERSION}
 
 ADD addon/ addon/
 
-#Add configuration file
 ADD config/Config.pm ${OTRS_ROOT}Kernel/Config.pm
-#ADD config/OutOfOffice.xml ${OTRS_ROOT}Kernel/Config/Files/OutOfOffice.xml
 ADD config/logo_agent.png /opt/otrs/var/httpd/htdocs/skins/Agent/default/img/
 ADD config/logo_customer.png /opt/otrs/var/httpd/htdocs/skins/Customer/default/img/
 
@@ -36,7 +34,6 @@ RUN cd /etc/mail && \
 
 ADD config/sendmail.mc /etc/mail/sendmail.mc
 
-##httpd configuration file SSL
 ADD config/*.conf /etc/httpd/conf.d/
 ADD etc/supervisord.d/otrs.ini /etc/supervisord.d/
 
@@ -55,9 +52,6 @@ RUN echo "+ : otrs : cron crond" |cat >> /etc/security/access.conf && \
 RUN sed -i -e '/<ValidateModule>Kernel::System::SysConfig::StateValidate<\/ValidateModule>/ s/^#*/#/' -i ${OTRS_ROOT}Kernel/Config/Files/Ticket.xml
 
 RUN mkdir -p ${OTRS_ROOT}var/{run,tmp}/
-
-#RUN git clone -b otrs4 https://github.com/eea/eionet.otrs.theme.git
-#ADD eionet.otrs.theme  /eionet.otrs.theme
 
 #Add run script
 ADD entrypoint.sh /

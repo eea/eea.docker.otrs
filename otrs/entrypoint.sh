@@ -18,13 +18,9 @@ sed "s#otrs_db_password#$OTRS_DB_PASSWORD#g" -i ${OTRS_ROOT}Kernel/Config.pm
 sed "s#ldap_password#$LDAP_PASSWORD#g" -i ${OTRS_ROOT}Kernel/Config.pm
 sed "s#ldap_host#$LDAP_HOST#g" -i ${OTRS_ROOT}Kernel/Config.pm
 
-#sed "s#ldap_host#$LDAP_HOST#g" -i ${OTRS_ROOT}Kernel/Config/Files/ZZZAuto.pm
-#sed "s#mtp_relay#$MTP_RELAY#g" -i ${OTRS_ROOT}Kernel/Config/Files/ZZZAuto.pm
-
 sed "s#host_ip_address#$SERVER_NAME#g" -i /etc/httpd/conf.d/zzz_otrs.conf
 sed "s#User apache#User otrs#g" -i /etc/httpd/conf/httpd.conf
 
-# Redundant creation of database: Use MYSQL_USER, MYSQL_PASSWORD and MYSQL_DATABASE
 $mysqlcmd -e 'use otrs'
 if [ $? -ne 0  ]; then
   $mysqlcmd -e "CREATE DATABASE IF NOT EXISTS otrs;"
@@ -46,7 +42,6 @@ else
 fi
 
 if ${OTRS_ROOT}bin/otrs.PackageManager.pl -a list | grep FAQ; then
-   #${OTRS_ROOT}bin/otrs.PackageManager.pl -a reinstall -p FAQ
    ${OTRS_ROOT}bin/otrs.PackageManager.pl -a reinstall-all
 else
    ${OTRS_ROOT}bin/otrs.PackageManager.pl -a install -p /addon/FAQ-4.0.11.opm
@@ -62,10 +57,6 @@ ${OTRS_ROOT}bin/otrs.Scheduler.pl -w 1
 ${OTRS_ROOT}bin/otrs.RebuildConfig.pl
 #${OTRS_ROOT}bin/otrs.DeleteCache.pl
 ${OTRS_ROOT}bin/otrs.RebuildTicketIndex.pl
-
-#git clone -b otrs4 https://github.com/eea/eionet.otrs.theme.git
-#chmod 755 /eionet.otrs.theme/install.sh
-#cd eionet.otrs.theme && ./install.sh
 
 ${OTRS_ROOT}bin/otrs.SetPermissions.pl --otrs-user=otrs --web-group=apache /opt/otrs
 
@@ -91,20 +82,5 @@ do
 done
 ( cd /etc/mail ; make )
 sed -e 's#  *#\n#g'  <<< "$MAIL_ADDRESSES" | sed -e 's#.*@##' |sort|uniq > /etc/mail/local-host-names
-
-for filename in /opt/otrs/var/httpd/htdocs/skins/Customer/default/css/*.css; do
-#echo $filename
-sed -i 's/f92/18898b/g' $filename
-sed -i 's/F92/18898b/g' $filename
-sed -i 's/FF9922/18898b/g' $filename
-done
-
-for filename in /opt/otrs/var/httpd/htdocs/skins/Agent/default/css/*.css; do
-#echo $filename
-sed -i 's/f92/18898b/g' $filename
-sed -i 's/F92/18898b/g' $filename
-sed -i 's/FF9922/18898b/g' $filename
-done
-
 
 supervisord
