@@ -53,11 +53,15 @@ ${OTRS_ROOT}bin/znuny.UpdateLastCustomerContact.pl
 #OTRS5
 #${OTRS_ROOT}bin/otrs.Console.pl Znuny::SortByLastContact
 
-${OTRS_ROOT}bin/Cron.sh start otrs
-${OTRS_ROOT}bin/otrs.Scheduler.pl -w 1
-${OTRS_ROOT}bin/otrs.RebuildConfig.pl
+${OTRS_ROOT}bin/Cron.sh start otrs &
+wait
+${OTRS_ROOT}bin/otrs.Scheduler.pl -w 1 &
+wait
+${OTRS_ROOT}bin/otrs.RebuildConfig.pl &
+wait
 #${OTRS_ROOT}bin/otrs.DeleteCache.pl
-${OTRS_ROOT}bin/otrs.RebuildTicketIndex.pl
+${OTRS_ROOT}bin/otrs.RebuildTicketIndex.pl &
+wait
 
 ${OTRS_ROOT}bin/otrs.SetPermissions.pl --otrs-user=otrs --web-group=apache /opt/otrs
 
@@ -79,13 +83,18 @@ fi
 > /etc/mail/virtusertable
 for address in $MAIL_ADDRESSES
 do
-    echo "$address  otrs" >> /etc/mail/virtusertable
+    echo "$address  otrs" >> /etc/mail/virtusertable &
+    wait
 done
-( cd /etc/mail ; make )
-sed -e 's#  *#\n#g'  <<< "$MAIL_ADDRESSES" | sed -e 's#.*@##' |sort|uniq > /etc/mail/local-host-names
+( cd /etc/mail ; make )  &
+wait
+sed -e 's#  *#\n#g'  <<< "$MAIL_ADDRESSES" | sed -e 's#.*@##' |sort|uniq > /etc/mail/local-host-names &
+wait
 
-yes | cp -rf /.procmailrc /opt/otrs/.procmailrc
-sed "s#TRUSTED_DOMAIN#$TRUSTED_DOMAIN#g" -i /opt/otrs/.procmailrc
+yes | cp -rf /.procmailrc /opt/otrs/.procmailrc &
+wait
+sed "s#TRUSTED_DOMAIN#$TRUSTED_DOMAIN#g" -i /opt/otrs/.procmailrc &
+wait
 sed "s#300px#3000px#g" -i /opt/otrs/var/httpd/htdocs/js/Core.Agent.js
 
 for filename in /opt/otrs/var/httpd/htdocs/skins/Customer/default/css/*.css; do
