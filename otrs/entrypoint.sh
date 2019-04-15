@@ -72,10 +72,6 @@ touch /var/log/otrs.log
 chown otrs /var/log/otrs.log
 chgrp apache /var/log/otrs.log
 
-cat /.procmailrc > /opt/otrs/.procmailrc
-sed "s#TRUSTED_DOMAIN#$TRUSTED_DOMAIN#g" -i /opt/otrs/.procmailrc
-sed "s#300px#3000px#g" -i /opt/otrs/var/httpd/htdocs/js/Core.Agent.js
-
 # Configure email
 if [ -z "$MAIL_ADDRESSES" ]; then
    MAIL_ADDRESSES="@$(hostname)"
@@ -88,6 +84,9 @@ done
 ( cd /etc/mail ; make )
 sed -e 's#  *#\n#g'  <<< "$MAIL_ADDRESSES" | sed -e 's#.*@##' |sort|uniq > /etc/mail/local-host-names
 
+yes | cp -rf /.procmailrc /opt/otrs/.procmailrc
+sed "s#TRUSTED_DOMAIN#$TRUSTED_DOMAIN#g" -i /opt/otrs/.procmailrc
+sed "s#300px#3000px#g" -i /opt/otrs/var/httpd/htdocs/js/Core.Agent.js
 
 for filename in /opt/otrs/var/httpd/htdocs/skins/Customer/default/css/*.css; do
 #echo $filename
