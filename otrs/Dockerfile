@@ -33,7 +33,7 @@ RUN cd /etc/mail && \
     cd - 
 
 ADD config/sendmail.mc /etc/mail/sendmail.mc
-
+ADD config/.procmailrc /.procmailrc
 ADD config/*.conf /etc/httpd/conf.d/
 ADD etc/supervisord.d/otrs.ini /etc/supervisord.d/
 

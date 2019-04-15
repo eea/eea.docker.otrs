@@ -71,6 +71,9 @@ touch /var/log/otrs.log
 chown otrs /var/log/otrs.log
 chgrp apache /var/log/otrs.log
 
+cat /.procmailrc > /opt/otrs/.procmailrc
+sed "s#TRUSTED_DOMAIN#$TRUSTED_DOMAIN#g" -i /opt/otrs/.procmailrc
+
 # Configure email
 if [ -z "$MAIL_ADDRESSES" ]; then
    MAIL_ADDRESSES="@$(hostname)"
