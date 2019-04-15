@@ -30,7 +30,7 @@ services:
 
   otrs:
     mem_limit: 3221225472
-    image: eeacms/eea-otrs:v1.1.12
+    image: eeacms/eea-otrs:v1.1.28
     hostname: helpdesk
     environment:
       LDAP_HOST: changeme
@@ -41,6 +41,7 @@ services:
       OTRS_ROOT_PASSWORD: changeme
       MYSQL_ROOT_PASSWORD: changeme #must match with above
       SERVER_NAME: myserver
+      TRUSTED_DOMAIN: mydomain
       TZ: Europe/Copenhagen
     depends_on:
       - "mariadb"

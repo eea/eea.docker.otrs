@@ -23,7 +23,7 @@ RUN yum install -y http://ftp.otrs.org/pub/otrs/RPMS/rhel/7/otrs-${OTRS_VERSION}
 
 ADD addon/ addon/
 
-ADD config/Config.pm ${OTRS_ROOT}Kernel/Config.pm
+ADD config/Config.pm /Config.pm
 ADD config/logo_agent.png /opt/otrs/var/httpd/htdocs/skins/Agent/default/img/
 ADD config/logo_customer.png /opt/otrs/var/httpd/htdocs/skins/Customer/default/img/
 
