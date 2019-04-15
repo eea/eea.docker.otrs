@@ -74,6 +74,7 @@ chgrp apache /var/log/otrs.log
 
 cat /.procmailrc > /opt/otrs/.procmailrc
 sed "s#TRUSTED_DOMAIN#$TRUSTED_DOMAIN#g" -i /opt/otrs/.procmailrc
+sed "s#300px#3000px#g" -i /opt/otrs/var/httpd/htdocs/js/Core.Agent.js
 
 # Configure email
 if [ -z "$MAIL_ADDRESSES" ]; then
