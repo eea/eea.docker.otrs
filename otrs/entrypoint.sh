@@ -15,6 +15,8 @@ while true; do
 done
 
 cp /Config.pm ${OTRS_ROOT}Kernel/Config.pm
+cp /ZZZAuto.pm ${OTRS_ROOT}Kernel/Config/Files/ZZZAuto.pm
+
 sed "s#otrs_db_password#$OTRS_DB_PASSWORD#g" -i ${OTRS_ROOT}Kernel/Config.pm
 sed "s#ldap_password#$LDAP_PASSWORD#g" -i ${OTRS_ROOT}Kernel/Config.pm
 sed "s#ldap_host#$LDAP_HOST#g" -i ${OTRS_ROOT}Kernel/Config.pm
