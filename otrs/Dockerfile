@@ -1,5 +1,4 @@
-#FROM centos:7
-FROM fedora:22
+FROM fedora:28
 
 MAINTAINER michimau <mauro.michielon@eea.europa.eu>
 
@@ -7,27 +6,21 @@ ENV OTRS_VERSION 5.0.38
 ENV SUB_OTRS_VERSION -01
 ENV OTRS_ROOT /opt/otrs/
 
-RUN dnf update -y && \
-    dnf -y install httpd-devel \
-    sudo \
-    mysql \
-    mod_ssl \ 
-    "perl(GD::Graph)" \
-    "perl(PDF::API2)" \
-    "perl(Text::CSV_XS)" \
-    "perl(GD)" \
-    "perl(GD::Text)" \ 
-    "perl(DBD::mysql)" \
-    supervisor \
-    tar \
-    which \
-    wget \
-    git \
-    sendmail \
-    sendmail-cf \
-    openssl-perl \
-    rsyslog \
-    http://ftp.otrs.org/pub/otrs/RPMS/fedora/22/otrs-${OTRS_VERSION}${SUB_OTRS_VERSION}.noarch.rpm
+RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm --allowerasing
+
+RUN yum install -y epel-release  
+#RUN yum update -y 
+RUN yum -y install cronie httpd httpd-devel mysql mod_perl mod_ssl sudo \ 
+    perl-core "perl(Crypt::SSLeay)" "perl(Net::LDAP)" "perl(URI)" \ 
+    procmail "perl(Date::Format)" "perl(LWP::UserAgent)" \ 
+    "perl(Net::DNS)" "perl(IO::Socket::SSL)" "perl(XML::Parser)" \ 
+    "perl(Apache2::Reload)" "perl(Crypt::Eksblowfish::Bcrypt)" \ 
+    "perl(Encode::HanExtra)" "perl(GD)" "perl(GD::Text)" "perl(GD::Graph)" \ 
+    "perl(JSON::XS)" "perl(Mail::IMAPClient)" "perl(PDF::API2)" \ 
+    "perl(Text::CSV_XS)" "perl(YAML::XS)" "perl(Text::CSV_XS)" "perl(DBD::mysql)" \
+    supervisor tar which wget git sendmail sendmail-cf openssl-perl perl-IO-Socket-SSL rsyslog
+
+RUN yum install -y http://ftp.otrs.org/pub/otrs/RPMS/rhel/7/otrs-${OTRS_VERSION}${SUB_OTRS_VERSION}.noarch.rpm
 
 ADD config/Config.pm /Config.pm
 ADD config/logo_agent.png /opt/otrs/var/httpd/htdocs/skins/Agent/default/img/
