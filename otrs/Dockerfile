@@ -2,10 +2,15 @@ FROM fedora:28
 
 MAINTAINER michimau <mauro.michielon@eea.europa.eu>
 
+ENV OTRS_VERSION 5.0.38
+ENV SUB_OTRS_VERSION -01
+ENV OTRS_ROOT /opt/otrs/
+
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm --allowerasing
-RUN yum install -y epel-release && \ 
-    yum update -y && \
-    yum -y install cronie httpd httpd-devel mysql mod_perl mod_ssl \ 
+
+RUN yum install -y epel-release  
+#RUN yum update -y 
+RUN yum -y install cronie httpd httpd-devel mysql mod_perl mod_ssl sudo \ 
     perl-core "perl(Crypt::SSLeay)" "perl(Net::LDAP)" "perl(URI)" \ 
     procmail "perl(Date::Format)" "perl(LWP::UserAgent)" \ 
     "perl(Net::DNS)" "perl(IO::Socket::SSL)" "perl(XML::Parser)" \ 
@@ -15,20 +20,14 @@ RUN yum install -y epel-release && \
     "perl(Text::CSV_XS)" "perl(YAML::XS)" "perl(Text::CSV_XS)" "perl(DBD::mysql)" \
     supervisor tar which wget git sendmail sendmail-cf openssl-perl perl-IO-Socket-SSL rsyslog
 
-ENV OTRS_VERSION 4.0.33
-ENV SUB_OTRS_VERSION -01
-ENV OTRS_ROOT /opt/otrs/
-
 RUN yum install -y http://ftp.otrs.org/pub/otrs/RPMS/rhel/7/otrs-${OTRS_VERSION}${SUB_OTRS_VERSION}.noarch.rpm
-
-ADD addon/ addon/
 
 ADD config/Config.pm /Config.pm
 ADD config/logo_agent.png /opt/otrs/var/httpd/htdocs/skins/Agent/default/img/
 ADD config/logo_customer.png /opt/otrs/var/httpd/htdocs/skins/Customer/default/img/
 
 RUN cd /etc/mail && \
-    rm virtusertable.db && \
+    rm -f virtusertable.db && \
     make && \
     cd - 
 
@@ -38,7 +37,7 @@ ADD config/*.conf /etc/httpd/conf.d/
 ADD etc/supervisord.d/otrs.ini /etc/supervisord.d/
 
 RUN echo "LoadModule http2_module modules/mod_http2.so" >> /etc/httpd/conf.modules.d/00-base.conf && \
-    chmod 755 ${OTRS_ROOT}scripts/*.sh && \
+    #chmod 755 ${OTRS_ROOT}scripts/*.sh && \
     sed -i '/filter_module/s/#//g' /etc/httpd/conf/httpd.conf && \
     sed -i "s/error\/noindex.html/otrs\/index.pl/" /etc/httpd/conf.d/welcome.conf
 
@@ -47,8 +46,7 @@ RUN echo "+ : otrs : cron crond" |cat >> /etc/security/access.conf && \
     sed -i -e '/pam_loginuid.so/ s/^#*/#/' /etc/pam.d/crond && \
     sed -i -e "s/^nodaemon=false/nodaemon=true/" /etc/supervisord.conf
 
-#Fix PostmasterFollowUpState config var, this line on Ticket.xml disallow the edition
-#of that field through SysConfig
+#Fix PostmasterFollowUpState config var, this line on Ticket.xml disallow the edition of that field through SysConfig
 RUN sed -i -e '/<ValidateModule>Kernel::System::SysConfig::StateValidate<\/ValidateModule>/ s/^#*/#/' -i ${OTRS_ROOT}Kernel/Config/Files/Ticket.xml
 
 RUN mkdir -p ${OTRS_ROOT}var/{run,tmp}/

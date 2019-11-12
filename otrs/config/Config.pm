@@ -49,7 +49,7 @@ sub Load {
     # fs root directory
     # ---------------------------------------------------- #
     $Self->{Home} = '/opt/otrs';
-    $Self->{ArticleDir} = '/article';
+    $Self->{ArticleDir} = '/opt/otrs/var/article';
     # ---------------------------------------------------- #
     # insert your own config settings "here"               #
     # config settings taken from Kernel/Config/Defaults.pm #

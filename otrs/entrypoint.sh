@@ -31,39 +31,37 @@ if [ $? -ne 0  ]; then
   $mysqlcmd otrs < ${OTRS_ROOT}scripts/database/otrs-initial_insert.mysql.sql
 fi
 
+${OTRS_ROOT}bin/otrs.SetPermissions.pl --otrs-user=otrs --web-group=apache /opt/otrs
+
 echo -e "Setting password for default admin account root@localhost..."
-${OTRS_ROOT}bin/otrs.SetPassword.pl --agent root@localhost $OTRS_ROOT_PASSWORD
-
-if ${OTRS_ROOT}bin/otrs.PackageManager.pl -a list | grep Znuny4OTRS-Repo; then
-   ${OTRS_ROOT}bin/otrs.PackageManager.pl -a reinstall-all
-else
-   ${OTRS_ROOT}bin/otrs.PackageManager.pl -a install -p /addon/Znuny4OTRS-Repo-4.0.25.opm && \
-   ${OTRS_ROOT}bin/otrs.PackageManager.pl -a install -p /addon/Znuny4OTRS-MarkTicketSeenUnseen-4.0.1.opm && \
-   ${OTRS_ROOT}bin/otrs.PackageManager.pl -a install -p /addon/Znuny4OTRS-SortByLastContact-4.0.2.opm
-fi
-
-if ${OTRS_ROOT}bin/otrs.PackageManager.pl -a list | grep FAQ; then
-   ${OTRS_ROOT}bin/otrs.PackageManager.pl -a reinstall-all
-else
-   ${OTRS_ROOT}bin/otrs.PackageManager.pl -a install -p /addon/FAQ-4.0.11.opm
-fi
-
-#OTRS4
-${OTRS_ROOT}bin/znuny.UpdateLastCustomerContact.pl
-#OTRS5
-#${OTRS_ROOT}bin/otrs.Console.pl Znuny::SortByLastContact
+#${OTRS_ROOT}bin/otrs.SetPassword.pl --agent root@localhost $OTRS_ROOT_PASSWORD
+sudo -u otrs ${OTRS_ROOT}bin/otrs.Console.pl Admin::User::SetPassword root@localhost $OTRS_ROOT_PASSWORD
 
 ${OTRS_ROOT}bin/Cron.sh start otrs &
 wait
-${OTRS_ROOT}bin/otrs.Scheduler.pl -w 1 &
+#${OTRS_ROOT}bin/otrs.Scheduler.pl -w 1 &
+sudo -u otrs ${OTRS_ROOT}bin/otrs.Daemon.pl start
 wait
-${OTRS_ROOT}bin/otrs.RebuildConfig.pl &
+#${OTRS_ROOT}bin/otrs.RebuildConfig.pl &
+sudo -u otrs ${OTRS_ROOT}bin/otrs.Console.pl Maint::Config::Rebuild
 wait
-#${OTRS_ROOT}bin/otrs.DeleteCache.pl
-${OTRS_ROOT}bin/otrs.RebuildTicketIndex.pl &
-wait
+sudo -u otrs ${OTRS_ROOT}bin/otrs.Console.pl Maint::Cache::Delete
 
-${OTRS_ROOT}bin/otrs.SetPermissions.pl --otrs-user=otrs --web-group=apache /opt/otrs
+#wait
+#${OTRS_ROOT}bin/otrs.DeleteCache.pl
+#${OTRS_ROOT}bin/otrs.RebuildTicketIndex.pl &
+
+#too slow for running this at restart
+#sudo -u otrs ${OTRS_ROOT}bin/otrs.Console.pl Maint::Ticket::EscalationIndexRebuild
+#sudo -u otrs ${OTRS_ROOT}bin/otrs.Console.pl Maint::Ticket::FulltextIndexRebuild
+
+mkdir -p /var/log/otrs
+touch /var/log/otrs/otrs.log
+chown -R otrs:apache /var/log/otrs
+
+sudo -u otrs ${OTRS_ROOT}bin/otrs.Console.pl Admin::Package::ReinstallAll >> /var/log/otrs/otrs.log
+
+wait
 
 cat /ssl/server.crt > /etc/pki/tls/certs/star-eionet2012.crt
 cat /ssl/server.key > /etc/pki/tls/private/star-eionet2012.key
@@ -71,10 +69,6 @@ cat /ssl/server-chain.crt > /etc/pki/tls/certs/rapidssl_ca.crt
 
 chmod 400 /etc/pki/tls/certs/*
 chmod 400 /etc/pki/tls/private/*
-
-touch /var/log/otrs.log
-chown otrs /var/log/otrs.log
-chgrp apache /var/log/otrs.log
 
 # Configure email
 if [ -z "$MAIL_ADDRESSES" ]; then
@@ -97,28 +91,15 @@ sed "s#TRUSTED_DOMAIN#$TRUSTED_DOMAIN#g" -i /opt/otrs/.procmailrc &
 wait
 sed "s#300px#3000px#g" -i /opt/otrs/var/httpd/htdocs/js/Core.Agent.js
 
-for filename in /opt/otrs/var/httpd/htdocs/skins/Customer/default/css/*.css; do
-#echo $filename
-sed -i 's/f92/18898a/g' $filename
-sed -i 's/F92/18898b/g' $filename
-sed -i 's/FF9922/18898c/g' $filename
-sed -i 's/F72/0c0c0c/g' $filename
-sed -i 's/FCB24B/C0C0C0/g' $filename
-sed -i 's/F39C19/303030/g' $filename
-
-done
-
 for filename in /opt/otrs/var/httpd/htdocs/skins/Agent/default/css/*.css; do
-
   sed -i 's/f92/18898a/g' $filename
-sed -i 's/F92/18898b/g' $filename
-sed -i 's/FF9922/18898c/g' $filename
-sed -i 's/F72/0c0c0c/g' $filename
-sed -i 's/FCB24B/C0C0C0/g' $filename
-sed -i 's/F39C19/303030/g' $filename
-
+  sed -i 's/F92/18898b/g' $filename
+  sed -i 's/FF9922/18898c/g' $filename
+  sed -i 's/F72/0c0c0c/g' $filename
+  sed -i 's/FCB24B/C0C0C0/g' $filename
+  sed -i 's/F39C19/303030/g' $filename
 done
 
 rm -rf /opt/otrs/var/httpd/htdocs/skins/Agent/default/css-cache/*
 
-supervisord
+supervisord -c /etc/supervisord.d/otrs.ini
