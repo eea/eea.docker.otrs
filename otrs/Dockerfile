@@ -23,7 +23,7 @@ RUN yum -y install cronie httpd httpd-devel mysql mod_perl mod_ssl sudo \
 RUN yum install -y http://ftp.otrs.org/pub/otrs/RPMS/rhel/7/otrs-${OTRS_VERSION}${SUB_OTRS_VERSION}.noarch.rpm
 
 ADD config/Config.pm /Config.pm
-ADD config/ZZZAuto.pm /ZZZAuto.pm
+#ADD config/ZZZAuto.pm /ZZZAuto.pm
 ADD config/logo_agent.png /opt/otrs/var/httpd/htdocs/skins/Agent/default/img/
 ADD config/logo_customer.png /opt/otrs/var/httpd/htdocs/skins/Customer/default/img/
 
