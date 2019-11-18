@@ -68,7 +68,8 @@ VERBOSE=on
 # Pipe all email into the PostMaster process.
 
 :0 :
-| $SYS_HOME/bin/otrs.PostMaster.pl
+| $SYS_HOME/bin/otrs.Console.pl Maint::PostMaster::Read
+#| $SYS_HOME/bin/otrs.PostMaster.pl
 
 
 # spool all the rest (which the otrs.PostMaster.pl can't process!)
