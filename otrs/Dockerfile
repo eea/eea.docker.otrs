@@ -2,7 +2,7 @@ FROM fedora:28
 
 MAINTAINER michimau <mauro.michielon@eea.europa.eu>
 
-ENV OTRS_VERSION 5.0.39
+ENV OTRS_VERSION 6.0.24
 ENV SUB_OTRS_VERSION -01
 ENV OTRS_ROOT /opt/otrs/
 
@@ -48,7 +48,7 @@ RUN echo "+ : otrs : cron crond" |cat >> /etc/security/access.conf && \
     sed -i -e "s/^nodaemon=false/nodaemon=true/" /etc/supervisord.conf
 
 #Fix PostmasterFollowUpState config var, this line on Ticket.xml disallow the edition of that field through SysConfig
-RUN sed -i -e '/<ValidateModule>Kernel::System::SysConfig::StateValidate<\/ValidateModule>/ s/^#*/#/' -i ${OTRS_ROOT}Kernel/Config/Files/Ticket.xml
+#RUN sed -i -e '/<ValidateModule>Kernel::System::SysConfig::StateValidate<\/ValidateModule>/ s/^#*/#/' -i ${OTRS_ROOT}Kernel/Config/Files/Ticket.xml
 
 RUN mkdir -p ${OTRS_ROOT}var/{run,tmp}/
 
