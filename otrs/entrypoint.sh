@@ -61,6 +61,9 @@ mkdir -p /var/log/otrs
 touch /var/log/otrs/otrs.log
 chown -R otrs:apache /var/log/otrs
 
+touch /var/log/otrs.log
+chown otrs:apache /var/log/otrs.log
+
 sudo -u otrs ${OTRS_ROOT}bin/otrs.Console.pl Admin::Package::ReinstallAll >> /var/log/otrs/otrs.log
 
 wait

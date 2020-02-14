@@ -2,7 +2,7 @@ FROM fedora:28
 
 MAINTAINER michimau <mauro.michielon@eea.europa.eu>
 
-ENV OTRS_VERSION 6.0.26
+ENV OTRS_VERSION 6.0.25
 ENV SUB_OTRS_VERSION -01
 ENV OTRS_ROOT /opt/otrs/
 
