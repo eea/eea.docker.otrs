@@ -84,89 +84,8 @@ sub Load {
         UserFirstname => 'givenName',
         UserLastname  => 'sn',
         UserEmail     => 'mail',
-        UserPhone     => 'telephonenumber',
+	#UserPhone     => 'telephonenumber',
     };
-
-## 1. Customer user backend: DB
-## (customer database backend and settings)
-#$Self->{CustomerUser1} = {
-#    Name => 'Customer Database',
-#    Module => 'Kernel::System::CustomerUser::DB',
-#    Params => {
-#        # if you want to use an external database, add the
-#        # required settings
-##        DSN => 'DBI:odbc:yourdsn',
-##        Type => 'mssql', # only for ODBC connections
-#        DSN => 'DBI:mysql:database=otrs;host=mariadb',
-#        User => 'otrs',
-#        Password => 'otrs_db_password',
-#        Table => 'customer_user',
-#    },
-#    # customer unique id
-#    CustomerKey => 'login',
-#    # customer #
-#    CustomerID => 'customer_id',
-#    CustomerValid => 'valid_id',
-#    CustomerUserListFields => ['first_name', 'last_name', 'email'],
-#    CustomerUserSearchFields => ['login', 'last_name', 'customer_id'],
-#    CustomerUserSearchPrefix => '',
-#    CustomerUserSearchSuffix => '*',
-#    CustomerUserSearchListLimit => 250,
-#    CustomerUserPostMasterSearchFields => ['email'],
-#        CustomerUserNameFields => ['title','first_name','last_name'],
-#    CustomerUserEmailUniqCheck => 1,
-##    # show not own tickets in customer panel, CompanyTickets
-##    CustomerUserExcludePrimaryCustomerID => 0,
-##    # generate auto logins
-##    AutoLoginCreation => 0,
-##    AutoLoginCreationPrefix => 'auto',
-##    # admin can change customer preferences
-##    AdminSetPreferences => 1,
-##    # cache time to live in sec. - cache any database queries
-##    CacheTTL => 0,
-##    # just a read only source
-##    ReadOnly => 1,
-#
-##     Map => [
-##         # note: Login, Email and CustomerID needed!
-##         # var, frontend, storage, shown, required, storage-type
-##         [ 'UserSalutation', 'Title', 'title', 1, 0, 'var' ],
-##         [ 'UserFirstname', 'Firstname', 'givenname', 1, 1, 'var' ],
-##         [ 'UserLastname', 'Lastname', 'sn', 1, 1, 'var' ],
-##         [ 'UserLogin', 'Login', 'uid', 1, 1, 'var' ],
-##         [ 'UserEmail', 'Email', 'mail', 1, 1, 'var' ],
-##         [ 'UserCustomerID', 'CustomerID', 'mail', 0, 1, 'var' ],
-##         [ 'UserPhone', 'Phone', 'telephonenumber', 1, 0, 'var' ],
-##     ],
-#
-#     Map => [
-#        # note: Login, Email and CustomerID needed!
-#        # var, frontend, storage, shown (1=always,2=lite), required, storage-type, http-link, readonly, http-link-target
-#        [ 'UserTitle',      'Title',      'title',        1, 0, 'var', '', 0 ],
-#        [ 'UserFirstname',  'Firstname',  'first_name',   1, 1, 'var', '', 0 ],
-#        [ 'UserLastname',   'Lastname',   'last_name',    1, 1, 'var', '', 0 ],
-#        [ 'UserLogin',      'Username',   'login',        1, 1, 'var', '', 0 ],
-#        [ 'UserPassword',   'Password',   'pw',           0, 0, 'var', '', 0 ],
-#        [ 'UserEmail',      'Email',      'email',        1, 1, 'var', '', 0 ],
-#        [ 'UserCustomerID', 'CustomerID', 'customer_id',  0, 1, 'var', '', 0 ],
-#        [ 'UserPhone',      'Phone',      'phone',        1, 0, 'var', '', 0 ],
-#        [ 'UserFax',        'Fax',        'fax',          1, 0, 'var', '', 0 ],
-#        [ 'UserMobile',     'Mobile',     'mobile',       1, 0, 'var', '', 0 ],
-#        [ 'UserStreet',     'Street',     'street',       1, 0, 'var', '', 0 ],
-#        [ 'UserZip',        'Zip',        'zip',          1, 0, 'var', '', 0 ],
-#        [ 'UserCity',       'City',       'city',         1, 0, 'var', '', 0 ],
-#        [ 'UserCountry',    'Country',    'country',      1, 0, 'var', '', 0 ],
-#        [ 'UserComment',    'Comment',    'comments',     1, 0, 'var', '', 0 ],
-#        [ 'ValidID',        'Valid',      'valid_id',     0, 1, 'int', '', 0 ],
-#    ],
-#    # default selections
-##    Selections => {
-##        UserTitle => {
-##            'Mr.' => 'Mr.',
-##            'Mrs.' => 'Mrs.',
-##        },
-##    },
-#};
 
 # 2. Customer user backend: LDAP
 # (customer ldap backend and settings)
@@ -218,7 +137,7 @@ $Self->{CustomerUser2} = {
          [ 'UserLogin', 'Login', 'uid', 1, 1, 'var' ],
          [ 'UserEmail', 'Email', 'mail', 1, 1, 'var' ],
          [ 'UserCustomerID', 'CustomerID', 'mail', 0, 1, 'var' ],
-         [ 'UserPhone', 'Phone', 'telephonenumber', 1, 0, 'var' ],
+	 [ 'UserPhone', 'Phone', 'telephonenumber', 1, 0, 'var' ],
      ],
  };
 

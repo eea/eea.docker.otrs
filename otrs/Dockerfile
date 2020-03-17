@@ -2,10 +2,6 @@ FROM fedora:28
 
 MAINTAINER michimau <mauro.michielon@eea.europa.eu>
 
-ENV OTRS_VERSION 6.0.26
-ENV SUB_OTRS_VERSION -01
-ENV OTRS_ROOT /opt/otrs/
-
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm --allowerasing
 
 RUN yum install -y epel-release  
@@ -18,9 +14,18 @@ RUN yum -y install cronie httpd httpd-devel mysql mod_perl mod_ssl sudo \
     "perl(Encode::HanExtra)" "perl(GD)" "perl(GD::Text)" "perl(GD::Graph)" \ 
     "perl(JSON::XS)" "perl(Mail::IMAPClient)" "perl(PDF::API2)" \ 
     "perl(Text::CSV_XS)" "perl(YAML::XS)" "perl(Text::CSV_XS)" "perl(DBD::mysql)" \
+    "perl(DBD::Pg)" "perl(XML::LibXML)" perl-DateTime-TimeZone \
     supervisor tar which wget git sendmail sendmail-cf openssl-perl perl-IO-Socket-SSL rsyslog
 
-RUN yum install -y http://ftp.otrs.org/pub/otrs/RPMS/rhel/7/otrs-${OTRS_VERSION}${SUB_OTRS_VERSION}.noarch.rpm
+ENV OTRS_VERSION 6_0_27
+#ENV SUB_OTRS_VERSION -01
+ENV OTRS_ROOT /opt/otrs/
+
+WORKDIR /opt
+RUN wget https://github.com/OTRS/otrs/archive/rel-${OTRS_VERSION}.tar.gz && \
+    tar xvf rel-${OTRS_VERSION}.tar.gz && \
+    mv /opt/otrs-rel-${OTRS_VERSION} otrs
+#RUN yum install -y http://ftp.otrs.org/pub/otrs/RPMS/rhel/7/otrs-${OTRS_VERSION}${SUB_OTRS_VERSION}.noarch.rpm
 
 ADD config/Config.pm /Config.pm
 #ADD config/ZZZAuto.pm /ZZZAuto.pm
@@ -55,6 +60,7 @@ RUN mkdir -p ${OTRS_ROOT}var/{run,tmp}/
 #Add run script
 ADD entrypoint.sh /
 RUN chmod 755 /*.sh && \
+    useradd -r -U -d /opt/otrs -c 'OTRS user' otrs -s /bin/bash && \
     usermod -G apache otrs
 
 EXPOSE 80 443 25
