@@ -15,7 +15,8 @@ RUN yum -y install cronie httpd httpd-devel mysql mod_perl mod_ssl sudo \
     "perl(JSON::XS)" "perl(Mail::IMAPClient)" "perl(PDF::API2)" \ 
     "perl(Text::CSV_XS)" "perl(YAML::XS)" "perl(Text::CSV_XS)" "perl(DBD::mysql)" \
     "perl(DBD::Pg)" "perl(XML::LibXML)" "perl(Template::Toolkit)" perl-DateTime-TimeZone \
-    supervisor tar which wget git sendmail sendmail-cf openssl-perl perl-IO-Socket-SSL rsyslog
+    supervisor tar which wget git sendmail sendmail-cf openssl-perl perl-IO-Socket-SSL \
+    rsyslog nginx fcgiwrap spawn-fcgi
 
 ENV OTRS_VERSION 6_0_27
 #ENV SUB_OTRS_VERSION -01
@@ -28,6 +29,7 @@ RUN wget https://github.com/OTRS/otrs/archive/rel-${OTRS_VERSION}.tar.gz && \
 #RUN yum install -y http://ftp.otrs.org/pub/otrs/RPMS/rhel/7/otrs-${OTRS_VERSION}${SUB_OTRS_VERSION}.noarch.rpm
 
 ADD config/Config.pm /Config.pm
+ADD config/fcgiwrap /etc/init.d/fcgiwrap
 #ADD config/ZZZAuto.pm /ZZZAuto.pm
 ADD config/logo_agent.png /opt/otrs/var/httpd/htdocs/skins/Agent/default/img/
 ADD config/logo_customer.png /opt/otrs/var/httpd/htdocs/skins/Customer/default/img/
