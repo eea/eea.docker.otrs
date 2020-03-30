@@ -1,12 +1,16 @@
-FROM fedora:28
+FROM centos:7
+#fedora:28
+#centos:7
+#fedora:28
 
 MAINTAINER michimau <mauro.michielon@eea.europa.eu>
 
-RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm --allowerasing
+RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm 
+#--allowerasing
 
 RUN yum install -y epel-release  
 #RUN yum update -y 
-RUN yum -y install cronie httpd httpd-devel mysql mod_perl mod_ssl sudo \ 
+RUN yum -y install cronie mysql sudo \ 
     perl-core "perl(Crypt::SSLeay)" "perl(Net::LDAP)" "perl(URI)" \ 
     procmail "perl(Date::Format)" "perl(LWP::UserAgent)" \ 
     "perl(Net::DNS)" "perl(IO::Socket::SSL)" "perl(XML::Parser)" \ 
@@ -14,8 +18,12 @@ RUN yum -y install cronie httpd httpd-devel mysql mod_perl mod_ssl sudo \
     "perl(Encode::HanExtra)" "perl(GD)" "perl(GD::Text)" "perl(GD::Graph)" \ 
     "perl(JSON::XS)" "perl(Mail::IMAPClient)" "perl(PDF::API2)" \ 
     "perl(Text::CSV_XS)" "perl(YAML::XS)" "perl(Text::CSV_XS)" "perl(DBD::mysql)" \
-    "perl(DBD::Pg)" "perl(XML::LibXML)" "perl(Template::Toolkit)" "perl(FCGI)" perl-DateTime-TimeZone \
-    supervisor tar which wget git sendmail sendmail-cf openssl-perl perl-IO-Socket-SSL rsyslog
+    "perl(DBD::Pg)" "perl(XML::LibXML)" "perl(Template)" "perl(FCGI)" "perl(Module::Refresh)" \
+    "perl(XML::LibXSLT)" "perl(Archive::Zip)" \
+    perl-DateTime-TimeZone supervisor tar which wget git sendmail sendmail-cf openssl-perl \
+    perl-IO-Socket-SSL rsyslog nginx spawn-fcgi fcgiwrap redhat-lsb-core
+    #meld
+    
 
 ENV OTRS_VERSION 6_0_27
 #ENV SUB_OTRS_VERSION -01
@@ -56,18 +64,21 @@ RUN echo "+ : otrs : cron crond" |cat >> /etc/security/access.conf && \
 #RUN sed -i -e '/<ValidateModule>Kernel::System::SysConfig::StateValidate<\/ValidateModule>/ s/^#*/#/' -i ${OTRS_ROOT}Kernel/Config/Files/Ticket.xml
 
 RUN mkdir -p ${OTRS_ROOT}var/{run,tmp}/
+#RUN yum install -y nginx spawn-fcgi fcgiwrap 
+#redhat-lsb-core
 
 #Add run script
 ADD entrypoint.sh /
 RUN chmod 755 /*.sh && \
     useradd -r -U -d /opt/otrs -c 'OTRS user' otrs -s /bin/bash && \
-    usermod -G apache otrs
+    usermod -G nginx otrs
 
-RUN yum -y install nginx spawn-fcgi fcgiwrap #redhat-lsb-core
-ADD config/otrs_config_nginx.conf /etc/nginx/conf.d
-ADD config/fcgiwrap /opt/fcgiwrap
+#RUN yum -y install nginx spawn-fcgi fcgiwrap #redhat-lsb-core
+ADD config/otrs_config_nginx.conf /
+ADD config/fcgiwrap /fcgiwrap
 RUN mkdir -p /var/run/fcgiwrap && \
     chown -R nginx /var/run/fcgiwrap
+#RUN yum install -y meld
 EXPOSE 80 443 25
 
 CMD ["/entrypoint.sh"]

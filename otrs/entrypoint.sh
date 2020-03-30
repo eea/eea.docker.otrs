@@ -21,8 +21,12 @@ sed "s#otrs_db_password#$OTRS_DB_PASSWORD#g" -i ${OTRS_ROOT}Kernel/Config.pm
 sed "s#ldap_password#$LDAP_PASSWORD#g" -i ${OTRS_ROOT}Kernel/Config.pm
 sed "s#ldap_host#$LDAP_HOST#g" -i ${OTRS_ROOT}Kernel/Config.pm
 
-#sed "s#host_ip_address#$SERVER_NAME#g" -i /etc/httpd/conf.d/zzz_otrs.conf
-#sed "s#User apache#User otrs#g" -i /etc/httpd/conf/httpd.conf
+cp /fcgiwrap /etc/sysconfig/fcgiwrap
+chmod a+x /etc/sysconfig/fcgiwrap
+sed "s#var_fcgi_children#$FCGI_CHILDREN#g" -i /etc/sysconfig/fcgiwrap
+
+cp /otrs_config_nginx.conf /etc/nginx/conf.d/otrs_config_nginx.conf
+sed "s#SERVER_NAME#$SERVER_NAME#g" -i /etc/nginx/conf.d/otrs_config_nginx.conf
 
 $mysqlcmd -e 'use otrs'
 if [ $? -ne 0  ]; then
@@ -40,8 +44,7 @@ echo -e "Setting password for default admin account root@localhost..."
 sudo -u otrs ${OTRS_ROOT}bin/otrs.Console.pl Admin::User::SetPassword root@localhost $OTRS_ROOT_PASSWORD
 
 ${OTRS_ROOT}bin/Cron.sh start otrs &
-#wait
-#${OTRS_ROOT}bin/otrs.Scheduler.pl -w 1 &
+wait
 sudo -u otrs ${OTRS_ROOT}bin/otrs.Daemon.pl start
 wait
 sudo -u otrs ${OTRS_ROOT}bin/otrs.Console.pl Maint::Config::Rebuild
@@ -57,8 +60,8 @@ chown -R otrs:nginx /var/log/otrs
 touch /var/log/otrs.log
 chown otrs:nginx /var/log/otrs.log
 
-#sudo -u otrs ${OTRS_ROOT}bin/otrs.Console.pl Admin::Package::ReinstallAll >> /var/log/otrs/otrs.log
-#wait
+sudo -u otrs ${OTRS_ROOT}bin/otrs.Console.pl Admin::Package::ReinstallAll >> /var/log/otrs/otrs.log
+wait
 
 cat /ssl/server.crt > /etc/pki/tls/certs/star-eionet2012.crt
 cat /ssl/server.key > /etc/pki/tls/private/star-eionet2012.key
@@ -80,13 +83,25 @@ done
 ( cd /etc/mail ; make )  &
 wait
 sed -e 's#  *#\n#g'  <<< "$MAIL_ADDRESSES" | sed -e 's#.*@##' |sort|uniq > /etc/mail/local-host-names &
-wait
+#wait
 
 yes | cp -rf /.procmailrc /opt/otrs/.procmailrc &
 wait
 sed "s#TRUSTED_DOMAIN#$TRUSTED_DOMAIN#g" -i /opt/otrs/.procmailrc &
 wait
-sed "s#300px#3000px#g" -i /opt/otrs/var/httpd/htdocs/js/Core.Agent.js
+
+
+#sed "s#300px#3000px#g" -i /opt/otrs/var/httpd/htdocs/js/Core.Agent.js
+
+for filename in /opt/otrs/var/httpd/htdocs/skins/Agent/default/css/*.css; do
+  sed -i 's/f92/18898a/g' $filename
+  sed -i 's/F92/18898b/g' $filename
+  sed -i 's/FF9922/18898c/g' $filename
+  sed -i 's/F72/0c0c0c/g' $filename
+  sed -i 's/FCB24B/C0C0C0/g' $filename
+  sed -i 's/F39C19/303030/g' $filename
+done
+
 echo "deleting cache"
 rm -rf /opt/otrs/var/httpd/htdocs/skins/Agent/default/css-cache/*
 

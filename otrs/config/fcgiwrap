@@ -3,17 +3,16 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
 SPAWN_FCGI="/usr/bin/spawn-fcgi"
 DAEMON="/usr/sbin/fcgiwrap"
-NAME="fcgiwrap"
-DESC="FastCGI wrapper"
 
-PIDFILE="/var/run/$NAME.pid"
+PIDFILE="/var/run/fcgiwrap/fcgiwrap.pid"
 
 test -x $SPAWN_FCGI || exit 0
 test -x $DAEMON || exit 0
 
 # FCGI_APP Variables
-FCGI_CHILDREN="1"
-FCGI_SOCKET="/var/run/fcgiwrap/$NAME.socket"
+FCGI_CHILDREN="var_fcgi_children"
+FCGI_SOCKET="/var/run/fcgiwrap/fcgiwrap.socket"
+FCGI_EXTRA_OPTIONS="-M 0700"
 FCGI_USER="nginx"
 FCGI_GROUP="nginx"
 # Socket owner/group (will default to FCGI_USER/FCGI_GROUP if not defined)
@@ -23,4 +22,4 @@ FCGI_SOCKET_GROUP="nginx"
 DAEMON_OPTS="-f"        # By default we redirect STDERR output from executed
                         # CGI through FastCGI, to disable this behaviour set
                         # DAEMON_OPTS to an empty value in the default's file
-exec $SPAWN_FCGI -s $FCGI_SOCKET  $ARGS -- $DAEMON $DAEMON_OPTS
+exec $SPAWN_FCGI -s $FCGI_SOCKET -F $FCGI_CHILDREN -M 0700 -S -u $FCGI_USER -P $PIDFILE $ARGS -- $DAEMON $DAEMON_OPTS
