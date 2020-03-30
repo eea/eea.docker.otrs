@@ -14,9 +14,8 @@ RUN yum -y install cronie httpd httpd-devel mysql mod_perl mod_ssl sudo \
     "perl(Encode::HanExtra)" "perl(GD)" "perl(GD::Text)" "perl(GD::Graph)" \ 
     "perl(JSON::XS)" "perl(Mail::IMAPClient)" "perl(PDF::API2)" \ 
     "perl(Text::CSV_XS)" "perl(YAML::XS)" "perl(Text::CSV_XS)" "perl(DBD::mysql)" \
-    "perl(DBD::Pg)" "perl(XML::LibXML)" "perl(Template::Toolkit)" perl-DateTime-TimeZone \
-    supervisor tar which wget git sendmail sendmail-cf openssl-perl perl-IO-Socket-SSL \
-    rsyslog nginx fcgiwrap spawn-fcgi
+    "perl(DBD::Pg)" "perl(XML::LibXML)" "perl(Template::Toolkit)" "perl(FCGI)" perl-DateTime-TimeZone \
+    supervisor tar which wget git sendmail sendmail-cf openssl-perl perl-IO-Socket-SSL rsyslog
 
 ENV OTRS_VERSION 6_0_27
 #ENV SUB_OTRS_VERSION -01
@@ -29,7 +28,6 @@ RUN wget https://github.com/OTRS/otrs/archive/rel-${OTRS_VERSION}.tar.gz && \
 #RUN yum install -y http://ftp.otrs.org/pub/otrs/RPMS/rhel/7/otrs-${OTRS_VERSION}${SUB_OTRS_VERSION}.noarch.rpm
 
 ADD config/Config.pm /Config.pm
-ADD config/fcgiwrap /etc/init.d/fcgiwrap
 #ADD config/ZZZAuto.pm /ZZZAuto.pm
 ADD config/logo_agent.png /opt/otrs/var/httpd/htdocs/skins/Agent/default/img/
 ADD config/logo_customer.png /opt/otrs/var/httpd/htdocs/skins/Customer/default/img/
@@ -65,6 +63,11 @@ RUN chmod 755 /*.sh && \
     useradd -r -U -d /opt/otrs -c 'OTRS user' otrs -s /bin/bash && \
     usermod -G apache otrs
 
+RUN yum -y install nginx spawn-fcgi fcgiwrap #redhat-lsb-core
+ADD config/otrs_config_nginx.conf /etc/nginx/conf.d
+ADD config/fcgiwrap /opt/fcgiwrap
+RUN mkdir -p /var/run/fcgiwrap && \
+    chown -R nginx /var/run/fcgiwrap
 EXPOSE 80 443 25
 
 CMD ["/entrypoint.sh"]
