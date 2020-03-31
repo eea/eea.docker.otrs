@@ -2,9 +2,9 @@ FROM fedora:28
 
 MAINTAINER michimau <mauro.michielon@eea.europa.eu>
 
-RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm --allowerasing
+#RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm --allowerasing
 
-RUN yum install -y epel-release  
+#RUN yum install -y epel-release  
 #RUN yum update -y 
 RUN yum -y install cronie httpd httpd-devel mysql mod_perl mod_ssl sudo \ 
     perl-core "perl(Crypt::SSLeay)" "perl(Net::LDAP)" "perl(URI)" \ 
