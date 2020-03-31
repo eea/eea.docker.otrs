@@ -1,14 +1,15 @@
-FROM centos:7
+FROM fedora:29
 #fedora:28
 #centos:7
 #fedora:28
 
 MAINTAINER michimau <mauro.michielon@eea.europa.eu>
-
-RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm 
+#RUN yum install -y http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm
+#RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm 
+#RUN yum install -y http://repo.openfusion.net/centos7-x86_64/openfusion-release-0.7-1.of.el7.noarch.rpm
 #--allowerasing
 
-RUN yum install -y epel-release  
+#RUN yum install -y epel-release  
 #RUN yum update -y 
 RUN yum -y install cronie mysql sudo \ 
     perl-core "perl(Crypt::SSLeay)" "perl(Net::LDAP)" "perl(URI)" \ 
@@ -18,7 +19,8 @@ RUN yum -y install cronie mysql sudo \
     "perl(Encode::HanExtra)" "perl(GD)" "perl(GD::Text)" "perl(GD::Graph)" \ 
     "perl(JSON::XS)" "perl(Mail::IMAPClient)" "perl(PDF::API2)" \ 
     "perl(Text::CSV_XS)" "perl(YAML::XS)" "perl(Text::CSV_XS)" "perl(DBD::mysql)" \
-    "perl(DBD::Pg)" "perl(XML::LibXML)" "perl(Template)" "perl(FCGI)" "perl(Module::Refresh)" \
+    "perl(DBD::Pg)" "perl(XML::LibXML)" "perl(Template)" "perl(Template::Toolkit)" \
+    "perl(FCGI)" "perl(Module::Refresh)" \
     "perl(XML::LibXSLT)" "perl(Archive::Zip)" \
     perl-DateTime-TimeZone supervisor tar which wget git sendmail sendmail-cf openssl-perl \
     perl-IO-Socket-SSL rsyslog nginx spawn-fcgi fcgiwrap redhat-lsb-core
