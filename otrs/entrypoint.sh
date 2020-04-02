@@ -84,29 +84,6 @@ echo reinstalling packages
 sudo -u otrs ${OTRS_ROOT}bin/otrs.Console.pl Admin::Package::ReinstallAll >> /var/log/otrs/otrs.log
 echo done
 
-#${OTRS_ROOT}bin/otrs.RebuildConfig.pl &
-#echo rebuilding Configuration
-#sudo -u otrs ${OTRS_ROOT}bin/otrs.Console.pl Maint::Config::Rebuild
-#echo done
-#wait
-#sudo -u otrs ${OTRS_ROOT}bin/otrs.Console.pl Maint::Cache::Delete
-
-#too slow for running this at restart
-#sudo -u otrs ${OTRS_ROOT}bin/otrs.Console.pl Maint::Ticket::EscalationIndexRebuild
-#sudo -u otrs ${OTRS_ROOT}bin/otrs.Console.pl Maint::Ticket::FulltextIndexRebuild
-
-#echo reinstalling packages
-#sudo -u otrs ${OTRS_ROOT}bin/otrs.Console.pl Admin::Package::ReinstallAll >> /var/log/otrs/otrs.log
-#echo done
-#wait
-
-cat /ssl/server.crt > /etc/pki/tls/certs/star-eionet2012.crt
-cat /ssl/server.key > /etc/pki/tls/private/star-eionet2012.key
-cat /ssl/server-chain.crt > /etc/pki/tls/certs/rapidssl_ca.crt
-
-chmod 400 /etc/pki/tls/certs/*
-chmod 400 /etc/pki/tls/private/*
-
 # Configure email
 if [ -z "$MAIL_ADDRESSES" ]; then
    MAIL_ADDRESSES="@$(hostname)"
