@@ -22,7 +22,6 @@ RUN wget https://github.com/OTRS/otrs/archive/rel-${OTRS_VERSION}.tar.gz && \
     tar xvf rel-${OTRS_VERSION}.tar.gz && \
     mv /opt/otrs-rel-${OTRS_VERSION} otrs
 
-#ADD config/Config.pm /Config.pm
 ADD config/logo_agent.png /opt/otrs/var/httpd/htdocs/skins/Agent/default/img/
 ADD config/logo_customer.png /opt/otrs/var/httpd/htdocs/skins/Customer/default/img/
 
