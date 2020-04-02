@@ -2,7 +2,7 @@ FROM fedora:29
 
 MAINTAINER michimau <mauro.michielon@eea.europa.eu>
 
-RUN yum -y install cronie httpd httpd-devel mysql mod_perl mod_ssl sudo \ 
+RUN yum -y install cronie httpd httpd-devel mysql mod_perl sudo \ 
     perl-core "perl(Crypt::SSLeay)" "perl(Net::LDAP)" "perl(URI)" \ 
     procmail "perl(Date::Format)" "perl(LWP::UserAgent)" \ 
     "perl(Net::DNS)" "perl(IO::Socket::SSL)" "perl(XML::Parser)" \ 
