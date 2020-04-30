@@ -28,40 +28,60 @@ services:
     labels:
       io.rancher.scheduler.affinity:host_label: hostname=changeme
 
-  otrs:
-    mem_limit: 3221225472
-    image: eeacms/eea-otrs:v1.1.28
+  otrs-frontend:
+    image: eeacms/eea-otrs:v6.0.27-5
     hostname: helpdesk
     environment:
+      LANG: en_US.UTF-8
+      LANGUAGE: en_US.UTF-8
+      LC_ALL: en_US.UTF-8
       LDAP_HOST: changeme
       LDAP_PASSWORD: changeme
-      MAIL_ADDRESSES: '@myhost.mydomain @url_service'
+      MAIL_ADDRESSES: '@changeme @changeme'
       MTP_RELAY: postfix
+      MYSQL_ROOT_PASSWORD: changeme
       OTRS_DB_PASSWORD: changeme
       OTRS_ROOT_PASSWORD: changeme
-      MYSQL_ROOT_PASSWORD: changeme #must match with above
-      SERVER_NAME: myserver
-      TRUSTED_DOMAIN: mydomain
+      SERVER_NAME: changeme
+      TRUSTED_DOMAIN: changeme
       TZ: Europe/Copenhagen
-    depends_on:
-      - "mariadb"
-      - "postfix"
     volumes:
-    - helpdesk-eionet-kernel-config:/opt/otrs/Kernel
-    - helpdesk-eionet-backups:/backups
+    - staging-helpdesk-eionet-kernel-config-6:/opt/otrs/Kernel
+    - staging-helpdesk-eionet-backups:/backups
     - /etc/localtime:/etc/localtime:ro
-    - /etc/pki/tls/certs/server-eionet.crt:/ssl/server.crt:ro
-    - /etc/pki/tls/private/server-eionet.key:/ssl/server.key:ro
-    - /etc/pki/tls/certs/server-chain-eionet.crt:/ssl/server-chain.crt:ro
+    - staging-helpdesk-eionet-article:/article
+    - staging-helpdesk-eionet-tmp:/opt/otrs/var/tmp
+    - staging-helpdesk-eionet-js-cache:/opt/otrs/var/httpd/htdocs/js/js-cache
+    - staging-helpdesk-eionet-css-cache:/opt/otrs/var/httpd/htdocs/skins/Agent/default/css-cache
+    domainname: eionet.europa.eu
+  otrs-backend:
+    image: eeacms/eea-otrs:v6.0.27-5
+    hostname: helpdesk
+    environment:
+      LANG: en_US.UTF-8
+      LANGUAGE: en_US.UTF-8
+      LC_ALL: en_US.UTF-8
+      LDAP_HOST: changeme
+      LDAP_PASSWORD: changeme
+      MAIL_ADDRESSES: '@changeme @changeme'
+      MASTER: 'true'
+      MTP_RELAY: postfix
+      MYSQL_ROOT_PASSWORD: changeme
+      OTRS_DB_PASSWORD: changeme
+      OTRS_ROOT_PASSWORD: changeme
+      SERVER_NAME: changeme
+      TRUSTED_DOMAIN: changeme
+      TZ: Europe/Copenhagen
+    volumes:
+    - staging-helpdesk-eionet-kernel-config-6:/opt/otrs/Kernel
+    - staging-helpdesk-eionet-backups:/backups
+    - /etc/localtime:/etc/localtime:ro
+    - staging-helpdesk-eionet-article:/article
+    - staging-helpdesk-eionet-tmp:/opt/otrs/var/tmp
     domainname: changeme
-    ports:
-    - 80:80
-    - 443:443
-    - '25:25'
-    networks:
-      - helpdesk-eionet-network
     labels:
-      io.rancher.scheduler.affinity:host_label: hostname=changeme
+      io.rancher.scheduler.affinity:host_label: changeme
+
 
   postfix:
     image: eeacms/postfix:eionet
