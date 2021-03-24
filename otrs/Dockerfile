@@ -13,14 +13,14 @@ RUN yum -y install cronie httpd httpd-devel mysql mod_perl sudo \
     "perl(DBD::Pg)" "perl(XML::LibXML)" "perl(Template::Toolkit)" perl-DateTime-TimeZone \
     supervisor tar which wget git sendmail sendmail-cf openssl-perl perl-IO-Socket-SSL rsyslog
 
-ENV OTRS_VERSION 6_0_28
+ENV OTRS_VERSION 6_0_33
 #ENV SUB_OTRS_VERSION -01
 ENV OTRS_ROOT /opt/otrs/
 
 WORKDIR /opt
-RUN wget https://github.com/OTRS/otrs/archive/rel-${OTRS_VERSION}.tar.gz && \
+RUN wget https://github.com/znuny/Znuny/archive/refs/tags/rel-${OTRS_VERSION}.tar.gz && \
     tar xvf rel-${OTRS_VERSION}.tar.gz && \
-    mv /opt/otrs-rel-${OTRS_VERSION} otrs
+    mv /opt/Znuny-rel-${OTRS_VERSION} otrs
 
 ADD config/logo_agent.png /opt/otrs/var/httpd/htdocs/skins/Agent/default/img/
 ADD config/logo_customer.png /opt/otrs/var/httpd/htdocs/skins/Customer/default/img/
