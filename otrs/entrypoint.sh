@@ -24,6 +24,13 @@ sed "s#ldap_host#$LDAP_HOST#g" -i ${OTRS_ROOT}Kernel/Config.pm
 sed "s#host_ip_address#$SERVER_NAME#g" -i /etc/httpd/conf.d/zzz_otrs.conf
 sed "s#User apache#User otrs#g" -i /etc/httpd/conf/httpd.conf
 
+
+sed "s#openid_provider_issuer#$OPENIDPROVIDERISSUER#g" -i /etc/httpd/conf.d/auth_openidc.conf
+sed "s#openid_client_id#$OPENIDCLIENTID#g" -i /etc/httpd/conf.d/auth_openidc.conf
+sed "s#openid_client_secret#$OPENIDCLIENTSECRET#g" -i /etc/httpd/conf.d/auth_openidc.conf
+sed "s#openid_redirect_uri#$OPENIDREDIRECTURI#g" -i /etc/httpd/conf.d/auth_openidc.conf
+sed "s#openid_cryptopass#$OPENIDCRYPTOPASS#g" -i /etc/httpd/conf.d/auth_openidc.conf
+
 #$mysqlcmd -e 'use otrs'
 #if [ $? -ne 0  ]; then
 #  $mysqlcmd -e "CREATE DATABASE IF NOT EXISTS otrs;"
