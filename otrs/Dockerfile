@@ -14,7 +14,8 @@ RUN yum -y install cronie httpd httpd-devel mysql mod_perl sudo \
     supervisor tar which wget git sendmail sendmail-cf openssl-perl perl-IO-Socket-SSL rsyslog \
     mod_auth_openidc
 
-ENV OTRS_VERSION 6_0_38
+ENV OTRS_VERSION 6_2_2
+#0_39
 #ENV SUB_OTRS_VERSION -01
 ENV OTRS_ROOT /opt/otrs/
 

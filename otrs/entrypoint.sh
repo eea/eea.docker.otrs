@@ -31,6 +31,9 @@ sed "s#openid_client_secret#$OPENIDCLIENTSECRET#g" -i /etc/httpd/conf.d/auth_ope
 sed "s#openid_redirect_uri#$OPENIDREDIRECTURI#g" -i /etc/httpd/conf.d/auth_openidc.conf
 sed "s#openid_cryptopass#$OPENIDCRYPTOPASS#g" -i /etc/httpd/conf.d/auth_openidc.conf
 
+sed "s#openid_default_logout_url#$OPENIDDEFAULTLOGOUTURL#g" -i /etc/httpd/conf.d/auth_openidc.conf
+
+
 #$mysqlcmd -e 'use otrs'
 #if [ $? -ne 0  ]; then
 #  $mysqlcmd -e "CREATE DATABASE IF NOT EXISTS otrs;"

@@ -1,1 +1,1 @@
-v6.0.38-openid
+v6.0.39-openid
