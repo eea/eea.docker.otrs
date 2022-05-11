@@ -45,6 +45,8 @@ RUN echo "+ : otrs : cron crond" |cat >> /etc/security/access.conf && \
     sed -i -e '/pam_loginuid.so/ s/^#*/#/' /etc/pam.d/crond && \
     sed -i -e "s/^nodaemon=false/nodaemon=true/" /etc/supervisord.conf
 
+ADD OTRS-AuthSessionRedis/Kernel/Config/Files/XML/AuthSessionRedis.xml /opt/otrs/Kernel/Config/Files/XML/AuthSessionRedis.xml
+ADD OTRS-AuthSessionRedis/Kernel/System/AuthSession/Redis.pm /opt/otrs/Kernel/System/AuthSession/Redis.pm
 #Fix PostmasterFollowUpState config var, this line on Ticket.xml disallow the edition of that field through SysConfig
 #RUN sed -i -e '/<ValidateModule>Kernel::System::SysConfig::StateValidate<\/ValidateModule>/ s/^#*/#/' -i ${OTRS_ROOT}Kernel/Config/Files/Ticket.xml
 
