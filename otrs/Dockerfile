@@ -10,10 +10,10 @@ RUN yum -y install cronie httpd httpd-devel mysql mod_perl sudo \
     "perl(Encode::HanExtra)" "perl(GD)" "perl(GD::Text)" "perl(GD::Graph)" \ 
     "perl(JSON::XS)" "perl(Mail::IMAPClient)" "perl(PDF::API2)" \ 
     "perl(Text::CSV_XS)" "perl(YAML::XS)" "perl(Text::CSV_XS)" "perl(DBD::mysql)" \
-    "perl(DBD::Pg)" "perl(XML::LibXML)" "perl(Template::Toolkit)" perl-DateTime-TimeZone \
+    "perl(DBD::Pg)" "perl(XML::LibXML)" "perl(Template::Toolkit)" perl-Moo perl-DateTime-TimeZone \
     supervisor tar which wget git sendmail sendmail-cf openssl-perl perl-IO-Socket-SSL rsyslog
 
-ENV OTRS_VERSION 6_0_42
+ENV OTRS_VERSION 6_0.42
 #ENV SUB_OTRS_VERSION -01
 ENV OTRS_ROOT /opt/otrs/
 
