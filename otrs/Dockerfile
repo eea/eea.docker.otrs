@@ -1,4 +1,4 @@
-FROM fedora:32
+FROM fedora:29
 
 MAINTAINER michimau <mauro.michielon@eea.europa.eu>
 
