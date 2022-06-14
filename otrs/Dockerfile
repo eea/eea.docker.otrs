@@ -1,4 +1,4 @@
-FROM fedora:32
+FROM fedora:29
 
 MAINTAINER michimau <mauro.michielon@eea.europa.eu>
 
@@ -11,7 +11,8 @@ RUN yum -y install cronie httpd httpd-devel mysql mod_perl sudo \
     "perl(JSON::XS)" "perl(Mail::IMAPClient)" "perl(PDF::API2)" \ 
     "perl(Text::CSV_XS)" "perl(YAML::XS)" "perl(Text::CSV_XS)" "perl(DBD::mysql)" \
     "perl(DBD::Pg)" "perl(XML::LibXML)" "perl(Template::Toolkit)" perl-Moo perl-DateTime-TimeZone \
-    supervisor tar which wget git sendmail sendmail-cf openssl-perl perl-IO-Socket-SSL rsyslog
+    supervisor tar which wget git sendmail sendmail-cf openssl-perl perl-IO-Socket-SSL rsyslog \
+    mod_auth_openidc
 
 ENV OTRS_VERSION 6_0_43
 #ENV SUB_OTRS_VERSION -01

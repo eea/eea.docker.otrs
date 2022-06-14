@@ -50,96 +50,16 @@ sub Load {
     # ---------------------------------------------------- #
     $Self->{Home} = '/opt/otrs';
     $Self->{ArticleDir} = '/article';
+
     # ---------------------------------------------------- #
     # insert your own config settings "here"               #
     # config settings taken from Kernel/Config/Defaults.pm #
     # ---------------------------------------------------- #
-    # $Self->{SessionUseCookie} = 0;
+    #$Self->{SessionUseCookie} = 0;
     # $Self->{CheckMXRecord} = 0;
+    $Self->{AuthModule} = 'Kernel::System::Auth::HTTPBasicAuth';
 
-    $Self->{'AuthModule1'} = 'Kernel::System::Auth::LDAP';
-    $Self->{'AuthModule::LDAP::Host1'} = 'ldaps://ldap_host';
-    $Self->{'AuthModule::LDAP::BaseDN1'} = 'ou=Users,o=Eionet,l=Europe';
-    $Self->{'AuthModule::LDAP::UID1'} = 'uid';
-    $Self->{'AuthModule::LDAP::AlwaysFilter1'} = '';
-    $Self->{'AuthModule::LDAP::SearchUserDN'} = 'cn=Accounts browser,o=EIONET,l=Europe';
-    $Self->{'AuthModule::LDAP::SearchUserPw'} = 'ldap_password';
-    $Self->{'AuthModule::LDAP::Params1'} = {
-        verify => 'none',
-        port => 636,
-        timeout => 120,
-        async => 0,
-        version => 3,
-    };
-
-    # agent data sync against ldap
-    $Self->{'AuthSyncModule'} = 'Kernel::System::Auth::Sync::LDAP';
-    $Self->{'AuthSyncModule::LDAP::Host'} = 'ldaps://ldap_host';
-    $Self->{'AuthSyncModule::LDAP::BaseDN'} = 'ou=Users,o=Eionet,l=Europe';
-    $Self->{'AuthSyncModule::LDAP::UID'} = 'uid';
-    $Self->{'AuthSyncModule::LDAP::SearchUserDN'} = 'cn=Accounts browser,o=EIONET,l=Europe';
-    $Self->{'AuthSyncModule::LDAP::SearchUserPw'} = 'ldap_password';
-    $Self->{'AuthSyncModule::LDAP::UserSyncMap'} = {
-        # DB -> LDAP
-        UserFirstname => 'givenName',
-        UserLastname  => 'sn',
-        UserEmail     => 'mail',
-	#UserPhone     => 'telephonenumber',
-    };
-
-# 2. Customer user backend: LDAP
-# (customer ldap backend and settings)
-$Self->{CustomerUser2} = {
-    Name => 'LDAP Datasource',
-    Module => 'Kernel::System::CustomerUser::LDAP',
-    Params => {
-        Host => 'ldaps://ldap_host',
-        BaseDN => 'ou=Users,o=Eionet,l=Europe',
-
-        # search scope (one|sub)
-        SSCOPE => 'one',
-        SourceCharset => 'utf-8',
-        DestCharset   => 'utf-8',
-
-        UserDN => 'cn=Accounts browser,o=EIONET,l=Europe',
-        UserPw => 'ldap_password',
-        # in case you want to add always one filter to each ldap query, use
-        # this option. e. g. AlwaysFilter => '(mail=*)' or AlwaysFilter => '(objectclass=user)'
-        #AlwaysFilter => '',
-        # if the charset of your ldap server is iso-8859-1, use this:
-
-        # Net::LDAP new params (if needed - for more info see perldoc Net::LDAP)
-        Params => {
-            verify => 'none',
-            port => 636,
-            timeout => 120,
-            async => 0,
-            version => 3,
-        },
-    },
-    # customer unique id
-    CustomerKey => 'uid',
-    # customer #
-    CustomerID => 'mail',
-    CustomerUserListFields => ['uid', 'cn', 'mail'],
-    CustomerUserSearchFields => ['uid', 'cn', 'mail'],
-    CustomerUserSearchPrefix => '',
-    CustomerUserSearchSuffix => '*',
-    CustomerUserSearchListLimit => 250,
-    CustomerUserPostMasterSearchFields => ['mail'],
-    CustomerUserNameFields => ['givenname', 'sn'],
-    Map => [
-         # note: Login, Email and CustomerID needed!
-         # var, frontend, storage, shown, required, storage-type
-         [ 'UserSalutation', 'Title', 'title', 1, 0, 'var' ],
-         [ 'UserFirstname', 'Firstname', 'givenname', 1, 1, 'var' ],
-         [ 'UserLastname', 'Lastname', 'sn', 1, 1, 'var' ],
-         [ 'UserLogin', 'Login', 'uid', 1, 1, 'var' ],
-         [ 'UserEmail', 'Email', 'mail', 1, 1, 'var' ],
-         [ 'UserCustomerID', 'CustomerID', 'mail', 0, 1, 'var' ],
-	 [ 'UserPhone', 'Phone', 'telephonenumber', 1, 0, 'var' ],
-     ],
- };
+};
 
     # ---------------------------------------------------- #
 
@@ -155,7 +75,6 @@ $Self->{CustomerUser2} = {
     #                                                      #
     # ---------------------------------------------------- #
     # ---------------------------------------------------- #
-}
 
 # ---------------------------------------------------- #
 # needed system stuff (don't edit this)                #

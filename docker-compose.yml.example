@@ -35,16 +35,25 @@ services:
       LANG: en_US.UTF-8
       LANGUAGE: en_US.UTF-8
       LC_ALL: en_US.UTF-8
-      LDAP_HOST: changeme
-      LDAP_PASSWORD: changeme
+
       MAIL_ADDRESSES: '@changeme @changeme'
       MTP_RELAY: postfix
       MYSQL_ROOT_PASSWORD: changeme
+
       OTRS_DB_PASSWORD: changeme
       OTRS_ROOT_PASSWORD: changeme
+
       SERVER_NAME: changeme
       TRUSTED_DOMAIN: changeme
       TZ: Europe/Copenhagen
+
+      OPENIDPROVIDERISSUER: https://keycloak-instance/realms/my_realm
+      OPENIDCLIENTSECRET: secret
+      OPENIDCLIENTID: client_id
+      OPENIDCRYPTOPASS: passs
+      OPENIDREDIRECTURI: https://myotrsinstance/otrs
+      OPENIDDEFAULTLOGOUTURL: https://google.com
+
     volumes:
     - staging-helpdesk-eionet-kernel-config-6:/opt/otrs/Kernel
     - staging-helpdesk-eionet-backups:/backups
@@ -54,6 +63,7 @@ services:
     - staging-helpdesk-eionet-js-cache:/opt/otrs/var/httpd/htdocs/js/js-cache
     - staging-helpdesk-eionet-css-cache:/opt/otrs/var/httpd/htdocs/skins/Agent/default/css-cache
     domainname: eionet.europa.eu
+
   otrs-backend:
     image: eeacms/eea-otrs:v6.0.27-5
     hostname: helpdesk

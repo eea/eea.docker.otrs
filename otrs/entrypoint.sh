@@ -24,6 +24,15 @@ sed "s#ldap_host#$LDAP_HOST#g" -i ${OTRS_ROOT}Kernel/Config.pm
 sed "s#host_ip_address#$SERVER_NAME#g" -i /etc/httpd/conf.d/zzz_otrs.conf
 sed "s#User apache#User otrs#g" -i /etc/httpd/conf/httpd.conf
 
+sed "s#openid_provider_issuer#$OPENIDPROVIDERISSUER#g" -i /etc/httpd/conf.d/auth_openidc.conf
+sed "s#openid_client_id#$OPENIDCLIENTID#g" -i /etc/httpd/conf.d/auth_openidc.conf
+sed "s#openid_client_secret#$OPENIDCLIENTSECRET#g" -i /etc/httpd/conf.d/auth_openidc.conf
+sed "s#openid_redirect_uri#$OPENIDREDIRECTURI#g" -i /etc/httpd/conf.d/auth_openidc.conf
+sed "s#openid_cryptopass#$OPENIDCRYPTOPASS#g" -i /etc/httpd/conf.d/auth_openidc.conf
+
+sed "s#openid_default_logout_url#$OPENIDDEFAULTLOGOUTURL#g" -i /etc/httpd/conf.d/auth_openidc.conf
+
+
 #$mysqlcmd -e 'use otrs'
 #if [ $? -ne 0  ]; then
 #  $mysqlcmd -e "CREATE DATABASE IF NOT EXISTS otrs;"
@@ -54,6 +63,9 @@ chown otrs:apache /var/log/otrs.log
 if [ -z "$MASTER" ]
 then
       echo "this is a SLAVE instance"
+      #echo reinstalling packages
+      #sudo -u otrs ${OTRS_ROOT}bin/otrs.Console.pl Admin::Package::ReinstallAll >> /var/log/otrs/otrs.log &
+      #echo done
 else
 
       $mysqlcmd -e 'use otrs'
@@ -74,15 +86,14 @@ else
       echo reinstalling packages
       sudo -u otrs ${OTRS_ROOT}bin/otrs.Console.pl Admin::Package::ReinstallAll >> /var/log/otrs/otrs.log
       echo done
-
       echo rebuilding Configuration
       sudo -u otrs ${OTRS_ROOT}bin/otrs.Console.pl Maint::Config::Rebuild
       echo done
 fi
 
-echo reinstalling packages
-sudo -u otrs ${OTRS_ROOT}bin/otrs.Console.pl Admin::Package::ReinstallAll >> /var/log/otrs/otrs.log
-echo done
+#echo reinstalling packages
+#sudo -u otrs ${OTRS_ROOT}bin/otrs.Console.pl Admin::Package::ReinstallAll >> /var/log/otrs/otrs.log &
+#echo done
 
 # Configure email
 if [ -z "$MAIL_ADDRESSES" ]; then
@@ -114,7 +125,7 @@ for filename in /opt/otrs/var/httpd/htdocs/skins/Agent/default/css/*.css; do
   sed -i 's/F39C19/303030/g' $filename
 done
 
-rm -rf /opt/otrs/var/httpd/htdocs/skins/Agent/default/css-cache/*
+rm -rf /opt/otrs/var/httpd/htdocs/skins/Agent/default/css-cache/* &
 
 if [ -z "$MASTER" ]
 then
