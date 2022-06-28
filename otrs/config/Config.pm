@@ -58,59 +58,59 @@ sub Load {
     # $Self->{CheckMXRecord} = 0;
     $Self->{AuthModule} = 'Kernel::System::Auth::HTTPBasicAuth';
 
-# 2. Customer user backend: LDAP
-# (customer ldap backend and settings)
-$Self->{CustomerUser2} = {
-    Name => 'LDAP Datasource',
-    Module => 'Kernel::System::CustomerUser::LDAP',
-    Params => {
-        Host => 'ldaps://ldap_host',
-        BaseDN => 'ou=Users,o=Eionet,l=Europe',
-
-        # search scope (one|sub)
-        SSCOPE => 'one',
-        SourceCharset => 'utf-8',
-        DestCharset   => 'utf-8',
-
-        UserDN => 'cn=Accounts browser,o=EIONET,l=Europe',
-        UserPw => 'ldap_password',
-        # in case you want to add always one filter to each ldap query, use
-        # this option. e. g. AlwaysFilter => '(mail=*)' or AlwaysFilter => '(objectclass=user)'
-        #AlwaysFilter => '',
-        # if the charset of your ldap server is iso-8859-1, use this:
-
-        # Net::LDAP new params (if needed - for more info see perldoc Net::LDAP)
+    # 2. Customer user backend: LDAP
+    # (customer ldap backend and settings)
+    $Self->{CustomerUser2} = {
+        Name => 'LDAP Datasource',
+        Module => 'Kernel::System::CustomerUser::LDAP',
         Params => {
-            verify => 'none',
-            port => 636,
-            timeout => 120,
-            async => 0,
-            version => 3,
+            Host => 'ldaps://ldap_host',
+            BaseDN => 'ou=Users,o=Eionet,l=Europe',
+
+            # search scope (one|sub)
+            SSCOPE => 'one',
+            SourceCharset => 'utf-8',
+            DestCharset   => 'utf-8',
+
+            UserDN => 'cn=Accounts browser,o=EIONET,l=Europe',
+            UserPw => 'ldap_password',
+            # in case you want to add always one filter to each ldap query, use
+            # this option. e. g. AlwaysFilter => '(mail=*)' or AlwaysFilter => '(objectclass=user)'
+            #AlwaysFilter => '',
+            # if the charset of your ldap server is iso-8859-1, use this:
+
+            # Net::LDAP new params (if needed - for more info see perldoc Net::LDAP)
+            Params => {
+              verify => 'none',
+              port => 636,
+              timeout => 120,
+              async => 0,
+              version => 3,
+            },
         },
-    },
-    # customer unique id
-    CustomerKey => 'uid',
-    # customer #
-    CustomerID => 'mail',
-    CustomerUserListFields => ['uid', 'cn', 'mail'],
-    CustomerUserSearchFields => ['uid', 'cn', 'mail'],
-    CustomerUserSearchPrefix => '',
-    CustomerUserSearchSuffix => '*',
-    CustomerUserSearchListLimit => 250,
-    CustomerUserPostMasterSearchFields => ['mail'],
-    CustomerUserNameFields => ['givenname', 'sn'],
-    Map => [
-         # note: Login, Email and CustomerID needed!
-         # var, frontend, storage, shown, required, storage-type
-         [ 'UserSalutation', 'Title', 'title', 1, 0, 'var' ],
-         [ 'UserFirstname', 'Firstname', 'givenname', 1, 1, 'var' ],
-         [ 'UserLastname', 'Lastname', 'sn', 1, 1, 'var' ],
-         [ 'UserLogin', 'Login', 'uid', 1, 1, 'var' ],
-         [ 'UserEmail', 'Email', 'mail', 1, 1, 'var' ],
-         [ 'UserCustomerID', 'CustomerID', 'mail', 0, 1, 'var' ],
-	 [ 'UserPhone', 'Phone', 'telephonenumber', 1, 0, 'var' ],
-     ],
- };
+        # customer unique id
+        CustomerKey => 'uid',
+        # customer #
+        CustomerID => 'mail',
+        CustomerUserListFields => ['uid', 'cn', 'mail'],
+        CustomerUserSearchFields => ['uid', 'cn', 'mail'],
+        CustomerUserSearchPrefix => '',
+        CustomerUserSearchSuffix => '*',
+        CustomerUserSearchListLimit => 250,
+        CustomerUserPostMasterSearchFields => ['mail'],
+        CustomerUserNameFields => ['givenname', 'sn'],
+        Map => [
+          # note: Login, Email and CustomerID needed!
+          # var, frontend, storage, shown, required, storage-type
+          [ 'UserSalutation', 'Title', 'title', 1, 0, 'var' ],
+          [ 'UserFirstname', 'Firstname', 'givenname', 1, 1, 'var' ],
+          [ 'UserLastname', 'Lastname', 'sn', 1, 1, 'var' ],
+          [ 'UserLogin', 'Login', 'uid', 1, 1, 'var' ],
+          [ 'UserEmail', 'Email', 'mail', 1, 1, 'var' ],
+          [ 'UserCustomerID', 'CustomerID', 'mail', 0, 1, 'var' ],
+	  [ 'UserPhone', 'Phone', 'telephonenumber', 1, 0, 'var' ],
+        ],
+    };
 
     # ---------------------------------------------------- #
 
