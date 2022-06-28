@@ -36,6 +36,9 @@ services:
       LANGUAGE: en_US.UTF-8
       LC_ALL: en_US.UTF-8
 
+      LDAP_HOST: changeme
+      LDAP_PASSWORD: changeme
+
       MAIL_ADDRESSES: '@changeme @changeme'
       MTP_RELAY: postfix
       MYSQL_ROOT_PASSWORD: changeme
