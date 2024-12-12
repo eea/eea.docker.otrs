@@ -1,6 +1,6 @@
 FROM fedora:29
 
-MAINTAINER michimau <mauro.michielon@eea.europa.eu>
+MAINTAINER sorenroug <soren.roug@eea.europa.eu>
 
 RUN yum -y install cronie httpd httpd-devel mysql mod_perl sudo \ 
     perl-core "perl(Crypt::SSLeay)" "perl(Net::LDAP)" "perl(URI)" \ 
@@ -10,7 +10,7 @@ RUN yum -y install cronie httpd httpd-devel mysql mod_perl sudo \
     "perl(Encode::HanExtra)" "perl(GD)" "perl(GD::Text)" "perl(GD::Graph)" \ 
     "perl(JSON::XS)" "perl(Mail::IMAPClient)" "perl(PDF::API2)" \ 
     "perl(Text::CSV_XS)" "perl(YAML::XS)" "perl(Text::CSV_XS)" "perl(DBD::mysql)" \
-    "perl(DBD::Pg)" "perl(XML::LibXML)" "perl(Template::Toolkit)" perl-Moo perl-DateTime-TimeZone \
+    "perl(DBD::Pg)" "perl(XML::LibXML)" "perl(XML::LibXSLT)" "perl(Template::Toolkit)" perl-Moo perl-DateTime-TimeZone \
     supervisor tar which wget git sendmail sendmail-cf openssl-perl perl-IO-Socket-SSL rsyslog \
     mod_auth_openidc
 

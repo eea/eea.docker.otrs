@@ -17,8 +17,10 @@ Instead it pulls a tagged image from Docker Hub.  When you have tested your chan
 and are satisfied, then you must push a new image up with a new version number that
 follows [semantic versioning](http://semver.org/) principles.  Here is how you do it:
 
+    git add {changed files}
     edit VERSION.txt
-    git commit VERSION.txt
+    git add VERSION.txt
+    git commit
     version=$(cat VERSION.txt)
     git tag -a $version -m "Tagging the $version release of the 'otrs' Docker image."
     git push origin $version
